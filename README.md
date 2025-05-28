@@ -1,2 +1,2 @@
 # PROJECT
-Proyecto de sena
+Proyecto de NeuroEsencia
