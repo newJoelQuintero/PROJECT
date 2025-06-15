@@ -13,7 +13,7 @@ body{
     transition: 0.7s;
 }
 header{
-    min-height: 100vh;
+    min-height: 90vh;
 }
 /*Barra de navegacion*/
 .nav__toggle{
@@ -135,7 +135,78 @@ header{
     background-color: #423153;
     transition: .7s;
 }
+/*------------------------------------*/
 
+/*MAIN_CONTENEDOR*/
+
+.main{
+    min-height: 80vh;
+    background-color: #fff;
+}
+.main__content{
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+.main__title{
+    display: inline-block;
+    font-size: 35px;
+    padding: 8px;
+    background-color: var(--color_principal);
+    color: #fff;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+.main__paragrap{
+    font-size: 20px;
+    color: #333;
+    line-height: 2;
+    text-align: justify;
+    max-width: 1200px;
+    width: 80%;
+}
+.main__picture{
+    margin: 20px;
+    height: 100%;
+}
+.main__img{
+    border-radius: 500px;
+    width: 400px;
+}
+.main__btn{
+    margin: 20px 0;
+    display: inline-block;
+    text-align: center;
+    background-color: var(--color_alternativo_v1);
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+/*------------------------------------*/
+
+/*section*/
+.section{
+    min-height: 80vh;
+    background-color: var(--color_principal);
+}
+.section__maps{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.section__title{
+    color: #fff;
+    font-size: 45px;
+    padding: 20px 0;
+}
 
 /*------------------------------------*/
 
@@ -152,5 +223,24 @@ header{
         grid-auto-flow: column;
         place-content: unset;
         padding: 0;
+    }
+}
+@media(width < 900px){
+    .header__title{
+        font-size: 55px;
+    }
+    .header__paragraph{
+        font-size: 18px;
+    }
+    .main__content{
+        display: block;
+        text-align: center;
+    }
+    .main__paragrap{
+        margin: 20px auto;
+        font-size: 18px;
+    }
+    .main__picture{
+        margin: 0 auto;
     }
 }
