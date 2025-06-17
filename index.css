@@ -22,7 +22,7 @@ header{
 .nav__toggle{
     width: 30px;
     height: 30px;
-    background-image: url(./icon.svg);
+    background-image: url(./Img/icon.svg);
     background-size: cover;
     cursor: pointer;
 }
