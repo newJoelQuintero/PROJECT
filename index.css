@@ -82,6 +82,11 @@ header{
     bottom: -5px;
     transition: 0.3s;
 }
+
+.nav__item--active:hover{
+    background-color: var(--color_principal);
+    color: #fff;
+}
 .nav__list .nav__item:hover:after{
     width: 100%;
 }
