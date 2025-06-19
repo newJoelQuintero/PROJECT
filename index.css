@@ -128,7 +128,7 @@ header{
     max-width: 900px;
     width: 80%;
     margin: 10px auto;
-    font-size: 20px;
+    font-size: 18px;
     color: #333;
     line-height: 2;
 }
@@ -175,7 +175,7 @@ header{
     margin: 20px 0;
 }
 .main__paragrap{
-    font-size: 20px;
+    font-size: 18px;
     color: #333;
     line-height: 2;
     text-align: justify;
@@ -228,7 +228,7 @@ header{
     margin: 20px 0;
 }
 .section__paragrap{
-    font-size: 20px;
+    font-size: 18px;
     color: #fff;
     line-height: 2;
     text-align: justify;
@@ -318,7 +318,15 @@ color: #fff;
     color: #e6e6e6;
     border: 1px solid #e6e6e6;
 }
-
+.section__target_btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px auto;
+    color: #222;
+    font-weight: 600;
+    text-transform: uppercase;
+}
 /*------------------------------------*/
 
 
