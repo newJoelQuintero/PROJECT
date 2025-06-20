@@ -17,6 +17,9 @@ body{
 }
 header{
     min-height: 100vh;
+    background-image: url(../Img/4417c477-9b3d-436e-a627-6a296485ed4b.jpg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 /*Barra de navegacion*/
 .nav__toggle{
