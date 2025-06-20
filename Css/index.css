@@ -208,6 +208,11 @@ header{
     padding: 20px;
     border-radius: 10px;
     text-decoration: none;
+    box-shadow: 0 2px 0.5px #000000;
+}
+
+.main__btn:hover{
+    background-color: var(--color_modo_oscuro_t);
 }
 
 /*------------------------------------*/
@@ -290,15 +295,31 @@ header{
 .m1{
     background-color: var(--color_principal);
     color: #e6e6e6;
+    box-shadow: 0 6px 15px #000000;
+    
 }
+.m1:hover {
+  transform: scale(1.05);
+}
+
 .m2{
     border: 1px solid var(--color_principal);
     color: var(--color_principal);
+    box-shadow: 0 6px 15px #000000;
 }
+.m2:hover {
+  transform: scale(1.05);
+}
+
 .m3{
     background-color: #222;
     color: #fff;
+    box-shadow: 0 6px 15px #000000;
 }
+.m3:hover {
+  transform: scale(1.05);
+}
+
 .section__tarjet_title{
     font-size: 35px;
     margin: 10px 0;
@@ -315,10 +336,16 @@ header{
     text-decoration: none;
     border-radius: 10px;
 }
+
+.section__tarjet_btn:hover{
+    background-color: #e6e6e6e6;
+    color: #000000
+}
 .b1{
     color: #fff;
     border: 1px solid #fff;
 }
+
 .b2{
     color: var(--color_principal);
     border: 1px solid var(--color_principal);
