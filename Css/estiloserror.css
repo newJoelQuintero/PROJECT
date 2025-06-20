@@ -1,21 +1,180 @@
-body{
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #e6e6e6e6;
-    color: #333;
+:root {
+    --color-fondo: #f8f9fa;
+    --color-primario: #4c3763;
+    --color-primario-oscuro: #3a2a4b;
+    --color-secundario: #7d5e9e;
+    --color-texto: #1a1a1a;
+    --color-texto-suave: #4a4a4a;
+    --color-borde: rgba(106, 90, 128, 0.2);
+}
+
+body {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    overflow: hidden;
+    min-height: 100vh;
+    line-height: 1.6;
 }
-.container{
-    text-align: center;
+
+.contenedor-404 {
+    width: 100%;
+    max-width: 1200px;
     padding: 2rem;
-    max-width: 800px;
 }
-h1{
-    color: #7d5e9e;
-    margin-top: 0;
+
+.tarjeta-psicologia {
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 15px 30px rgba(76, 55, 99, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+@media (min-width: 768px) {
+    .tarjeta-psicologia {
+        flex-direction: row;
+        min-height: 400px;
+    }
+}
+
+.ilustracion {
+    position: relative;
+    background: linear-gradient(135deg, #f3e9ff 0%, #e2d1f9 100%);
+    padding: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+@media (min-width: 768px) {
+    .ilustracion {
+        padding: 0;
+    }
+}
+
+.cerebro {
+    width: 180px;
+    height: 180px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%234c3763"><path d="M12 3a9 9 0 0 0-9 9c0 2.17.93 4.13 2.42 5.5.5.5.58 1.29.58 1.5 0 1.38 1.12 2.5 2.5 2.5.21 0 1-.08 1.5-.58C10.87 20.07 12.83 21 15 21a9 9 0 0 0 9-9 9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7c0 1.63-.67 3.12-1.76 4.24l-1.41-1.41A5 5 0 0 0 17 12a5 5 0 0 0-5-5 5 5 0 0 0-5 5c0 1.03.31 2 .86 2.83l-1.41 1.41A7 7 0 0 1 5 12a7 7 0 0 1 7-7z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    z-index: 2;
+    animation: flotar 6s ease-in-out infinite;
+}
+
+.onda-psicologica {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(124, 94, 158, 0.1) 0%, rgba(124, 94, 158, 0) 70%);
+    border-radius: 50%;
+    animation: pulsar 8s ease-in-out infinite;
+}
+
+@keyframes flotar {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(2deg); }
+}
+
+@keyframes pulsar {
+    0% { transform: scale(0.8); opacity: 0.7; }
+    50% { transform: scale(1.1); opacity: 0.3; }
+    100% { transform: scale(0.8); opacity: 0.7; }
+}
+
+.contenido-texto {
+    padding: 3rem 2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .contenido-texto {
+        padding: 3rem;
+    }
+}
+
+.codigo-404 {
+    font-family: 'Playfair Display', serif;
+    font-size: 6rem;
+    font-weight: 700;
+    color: var(--color-primario);
+    margin: 0 0 1rem 0;
+    line-height: 1;
+}
+
+.titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-texto);
+    margin: 0 0 1.5rem 0;
+}
+
+.descripcion {
+    font-size: 1.1rem;
+    color: var(--color-texto-suave);
+    margin: 0 0 2.5rem 0;
+    max-width: 400px;
+}
+
+.contenedor-boton {
+    margin-top: auto;
+}
+
+.boton-primario {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-primario);
+    color: white;
+    padding: 0.85rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(76, 55, 99, 0.2);
+    border: none;
+    cursor: pointer;
+}
+
+.boton-primario:hover {
+    background-color: var(--color-primario-oscuro);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(76, 55, 99, 0.3);
+}
+
+.boton-primario svg {
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.boton-primario:hover svg {
+    transform: translateX(3px);
+}
+
+@media (max-width: 768px) {
+    .codigo-404 {
+        font-size: 4.5rem;
+    }
+    
+    .titulo {
+        font-size: 2rem;
+    }
+    
+    .ilustracion, .contenido-texto {
+        padding: 2rem;
+    }
 }

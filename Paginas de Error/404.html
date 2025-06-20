@@ -3,47 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - Terapia para Paginas Perdidas</title>
+    <title>404 - Explorando la mente</title>
     <link rel="stylesheet" href="../Css/estiloserror.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <div class="error-content">
-            <h1>404</h1>
-            <h2>¡Ups! Parece que esta página necesita terapia</h2>
-            <div class="animacion-container">
-                <div class="sofa">
-                    <div class="paciente" id="paciente">
-                        <div class="ojos">
-                            <div class="ojo left"></div>
-                            <div class="ojo right"></div>
-                        </div>
-                        <div class="boca"></div>
-                    </div>
-                    <div class="psicologia" id="psicologia">
-                        <div class="bloc"></div>
-                        <div class="anteojos">
-                            <div class="lens left"></div>
-                            <div class="lens right"></div>
-                        </div>
-                    </div>
-                </div>
+    <div class="contenedor-404">
+        <div class="tarjeta-psicologia">
+            <div class="ilustracion">
+                <div class="cerebro"></div>
+                <div class="onda-psicologica"></div>
             </div>
-            <p class="mensaje">La pagina que buscas parece estar
-                sufriendo un episodio de desaparición.
-                Pero no te preocupes, nuestros especialistas están 
-                trabajando en ello. 
-            </p>
-            <button class="volver" onclick="window.history.back()">
-                <i class="fas fa-couch"></i> Regresar a un lugar seguro
-            </button>
-            <div class="burbuja-de-pensamiento" id="burbuja-de-pensamiento">
-                "¿Será que mi padre fue una pagina 404?"
+            <div class="contenido-texto">
+                <h1 class="codigo-404">404</h1>
+                <h2 class="titulo">Página en terapia</h2>
+                <p class="descripcion">La página que buscas está teniendo una sesión introspectiva y no está disponible en este momento.</p>
+                <div class="contenedor-boton">
+                    <a href="../index.html" class="boton-primario">
+                        <span>Volver al equilibrio</span>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-
-    <script src="../Script/scripterror.js"></script>
 </body>
 </html>
