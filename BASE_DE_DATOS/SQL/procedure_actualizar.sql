@@ -58,7 +58,7 @@ CREATE PROCEDURE actualizar_cliente(
     IN password_cliente VARCHAR(10),
     IN email_cliente VARCHAR(40),
     IN rhcliente VARCHAR(5),
-    IN tel_cliente VARCHAR(10),
+    IN tel_cliente VARCHAR(10)
 )
 BEGIN
     UPDATE CLIENTE SET
