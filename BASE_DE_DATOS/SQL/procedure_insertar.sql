@@ -50,25 +50,7 @@ BEGIN
     VALUES(tipodocumento, dnicliente, nomcliente, direcccliente, fnacicliente, usuariocliente, passwordcliente, emailcliente, rhcliente, tel_cliente, idempleado);
 END //
 
-DELIMITER //
-CREATE PROCEDURE INSERTAR_TEL_CLIENTE(
-IN telcliente BIGINT,
-IN idcliente INT
-)
-BEGIN
-	INSERT INTO TEL_CLIENTE(tel_cliente, id_cliente)
-    VALUES(telcliente, idcliente);
-END //
 
-DELIMITER //
-CREATE PROCEDURE INSERTAR_EMAIL_CLIENTE(
-IN emailcliente VARCHAR(40),
-IN idcliente INT
-)
-BEGIN
-	INSERT INTO EMAIL_CLIENTE(email_cliente, id_cliente)
-    VALUES(emailcliente, idcliente);
-END //
 
 DELIMITER //
 CREATE PROCEDURE INSERTAR_CITA(
