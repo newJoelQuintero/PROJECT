@@ -25,11 +25,10 @@ DELIMITER //
 CREATE PROCEDURE INSERTAR_USUARIO_EMPLEADO(
 IN nomusuario VARCHAR(40),
 IN passwordusuario VARCHAR(25),
-IN idempleado INT
 )
 BEGIN
-	INSERT INTO USUARIO_EMPLEADO(nom_usuario,password_usuario, id_empleado)
-    VALUES(nomusuario, passwordusuario, idempleado);
+	INSERT INTO USUARIO_EMPLEADO(nom_usuario,password_usuario)
+    VALUES(nomusuario, passwordusuario);
 END //
 
 DELIMITER //
