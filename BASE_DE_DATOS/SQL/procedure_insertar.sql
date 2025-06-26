@@ -38,12 +38,16 @@ IN dnicliente VARCHAR(10),
 IN nomcliente VARCHAR(25),
 IN direcccliente VARCHAR(30),
 IN fnacicliente DATE,
+IN usuario_cliente VARCHAR(40),
+IN password_cliente VARCHAR(10),
+IN email_cliente VARCHAR(40),
 IN rhcliente VARCHAR(5),
+IN tel_cliente VARCHAR(10)
 IN idempleado INT
 )
 BEGIN
-	INSERT INTO CLIENTE(tipo_documento, dni_cliente, nom_cliente, direcc_cliente, fnaci_cliente, rh_cliente, id_empleado)
-    VALUES(tipodocumento, dnicliente, nomcliente, direcccliente, fnacicliente, rhcliente, idempleado);
+	INSERT INTO CLIENTE(tipo_documento, dni_cliente, nom_cliente, direcc_cliente, fnaci_cliente, usuario_cliente, password_cliente, email_cliente, rh_cliente, tel_cliente, id_empleado)
+    VALUES(tipodocumento, dnicliente, nomcliente, direcccliente, fnacicliente, usuariocliente, passwordcliente, emailcliente, rhcliente, tel_cliente, idempleado);
 END //
 
 DELIMITER //
