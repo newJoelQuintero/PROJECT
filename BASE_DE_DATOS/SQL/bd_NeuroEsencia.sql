@@ -42,7 +42,7 @@ CREATE TABLE CITA(
 id_cita BIGINT PRIMARY KEY NOT NULL,
 fecha_cita DATE NOT NULL,
 hora_cita TIME NOT NULL,
-valor_cita FLOAT,
+valor_cita FLOAT NOT NULL,
 id_empleado INT NOT NULL,
 FOREIGN KEY(id_empleado)references EMPLEADO(id_empleado));
 
