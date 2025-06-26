@@ -1,53 +1,28 @@
 USE db_neuroEsencia;
 
-INSERT INTO EMPLEADO (tipo_documento, dni_empleado, nom_empleado, dire_empleado, fnaci_empleado, rh_empleado) VALUES
-('CC', '1234567890', 'Juan Pérez', 'Calle 123', '1985-05-10', 'O+'),
-('TI', '2345678901', 'Ana Gómez', 'Carrera 45', '1990-07-22', 'A-'),
-('PET', '3456789012', 'Luis Martínez', 'Av. Siempreviva', '1982-12-01', 'B+'),
-('PPT', '4567890123', 'María López', 'Calle Luna', '1979-03-17', 'AB-'),
-('Pasaporte', '5678901234', 'Carlos Torres', 'Calle Sol', '1995-09-30', 'O-');
+INSERT INTO EMPLEADO (tipo_documento, dni_empleado, nom_empleado, dire_empleado, fnaci_empleado, usuario_empleado, password_empleado, email_empleado, tel_empleado, rh_empleado) VALUES
+('CC', '1234567890', 'Juan Pérez', 'Calle 123', '1985-05-10','usu1','juan3456','juanperez@email.com',3101234567,'O+'),
+('TI', '2345678901', 'Ana Gómez', 'Carrera 45', '1990-07-22', 'usu2','Goan2900', 'anagomez@email.com', 3112345678, 'A-'),
+('PET', '3456789012', 'Luis Martínez', 'Av. Siempreviva', '1982-12-01', 'usu3','Marti1092', 'luismartinez@email.com', 3123456789, 'B+'),
+('PPT', '4567890123', 'María López', 'Calle Luna', '1979-03-17', 'usu4','Goan2900', 'marialopez@email.com', 3134567890,'AB-'),
+('Pasaporte', '5678901234', 'Carlos Torres', 'Calle Sol', '1995-09-30', 'usu5','Goan2900', 'carlostorres@email.com', 3145678901,'O-');
 
-INSERT INTO TEL_EMPLEADO (tel_empleado, id_empleado) VALUES
-(3101234567, 1),
-(3112345678, 2),
-(3123456789, 3),
-(3134567890, 4),
-(3145678901, 5);
 
-INSERT INTO EMAIL_EMPLEADO (email_empleado, id_empleado) VALUES
-('juanperez@email.com', 1),
-('anagomez@email.com', 2),
-('luismartinez@email.com', 3),
-('marialopez@email.com', 4),
-('carlostorres@email.com', 5);
 
-INSERT INTO USUARIO_EMPLEADO (nom_usuario, password_usuario, id_empleado) VALUES
-('jperez', 'pass123', 1),
-('agomez', 'pass234', 2),
-('lmartinez', 'pass345', 3),
-('mlopez', 'pass456', 4),
-('ctorres', 'pass567', 5);
+INSERT INTO USUARIO (nom_usuario, password_usuario) VALUES
+('jperez', 'pass123'),
+('agomez', 'pass234'),
+('lmartinez', 'pass345'),
+('mlopez', 'pass456'),
+('ctorres', 'pass567');
 
-INSERT INTO CLIENTE (tipo_documento, dni_cliente, nom_cliente, direcc_cliente, fnaci_cliente, rh_cliente, id_empleado) VALUES
-('CC', '7890123456', 'Laura Ríos', 'Calle 10', '1992-02-14', 'A+', 1),
-('TI', '8901234567', 'Pedro Ramírez', 'Carrera 7', '1998-06-21', 'B-', 2),
-('PET', '9012345678', 'Elena Castro', 'Av. 68', '1987-11-05', 'O+', 3),
-('PPT', '0123456789', 'Daniela Méndez', 'Calle 80', '1993-04-30', 'AB+', 4),
-('Pasaporte', '1098765432', 'Andrés Herrera', 'Carrera 100', '1989-01-19', 'O-', 5);
+INSERT INTO CLIENTE (tipo_documento, dni_cliente, nom_cliente, direcc_cliente, fnaci_cliente, usuario_cliente, password_cliente, email_cliente, rh_cliente, tel_cliente, id_empleado) VALUES
+('CC', '7890123456', 'Laura Ríos', 'Calle 10', '1992-02-14', 'laurios55','rios7860', 'laura.rios@email.com', 'A+', 3201234567, 1),
+('TI', '8901234567', 'Pedro Ramírez', 'Carrera 7', '1998-06-21',, 'laurios55','rios7860', 'laura.rios@email.com', 'B-', 3212345678, 2),
+('PET', '9012345678', 'Elena Castro', 'Av. 68', '1987-11-05', 'laurios55','rios7860', 'laura.rios@email.com', 'O+', 3223456789, 3),
+('PPT', '0123456789', 'Daniela Méndez', 'Calle 80', '1993-04-30', 'laurios55','rios7860', 'laura.rios@email.com', 'AB+', 3234567890, 4),
+('Pasaporte', '1098765432', 'Andrés Herrera', 'Carrera 100', '1989-01-19', 'laurios55','rios7860', 'laura.rios@email.com', 'O-', 3245678901, 5);
 
-INSERT INTO TEL_CLIENTE (tel_cliente, id_cliente) VALUES
-(3201234567, 1),
-(3212345678, 2),
-(3223456789, 3),
-(3234567890, 4),
-(3245678901, 5);
-
-INSERT INTO EMAIL_CLIENTE (email_cliente, id_cliente) VALUES
-('laura.rios@email.com', 1),
-('pedro.ramirez@email.com', 2),
-('elena.castro@email.com', 3),
-('daniela.mendez@email.com', 4),
-('andres.herrera@email.com', 5);
 
 INSERT INTO CITA (id_cita, fecha_cita, hora_cita, valor_cita, id_empleado) VALUES
 (101, '2025-06-01', '09:00:00', 150000, 1),
