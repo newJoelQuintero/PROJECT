@@ -7,32 +7,19 @@ IN dniempleado VARCHAR(10),
 IN nomempleado VARCHAR(25),
 IN direempleado VARCHAR(30),
 IN fnaciempleado DATE,
+IN usuario_empleado VARCHAR(40),
+IN password_empleado VARCHAR(10),
+IN email_empleado VARCHAR(40),
+IN tel_empleado VARCHAR(10),
 IN rhempleado VARCHAR(5)
 )
 BEGIN
-	INSERT INTO EMPLEADO(tipo_documento, dni_empleado, nom_empleado, direc_empleado, fnaci_empleado, rh_empleado)
-    VALUES(tipodocumento, dniempleado, nomempleado, direempleado, fnaciempleado, rhempleado);
+	INSERT INTO EMPLEADO(tipo_documento, dni_empleado, nom_empleado, direc_empleado, fnaci_empleado, usuario_empleado, password_empleado, email_empleado, tel_empleado, rh_empleado)
+    VALUES(tipodocumento, dniempleado, nomempleado, direempleado, fnaciempleado, usuarioempleado, passwordempleado, emailempleado, telempleado, rhempleado);
 END //
 
-DELIMITER //
-CREATE PROCEDURE INSERTAR_TEL_EMPLEADO(
-IN telempleado BIGINT,
-IN idempleado INT
-)
-BEGIN
-	INSERT INTO TEL_EMPLEADO(tel_empleado, id_empleado)
-    VALUES(telempleado, idempleado);
-END //
 
-DELIMITER //
-CREATE PROCEDURE INSERTAR_EMAIL_EMPLEADO(
-IN emailempleado VARCHAR(40),
-IN idempleado INT
-)
-BEGIN
-	INSERT INTO EMAIL_EMPLEADO(email_empleado, id_empleado)
-    VALUES(emailempleado, idempleado);
-END //
+
 
 DELIMITER //
 CREATE PROCEDURE INSERTAR_USUARIO_EMPLEADO(
