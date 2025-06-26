@@ -9,6 +9,10 @@ CREATE PROCEDURE ACTUALIZAR_EMPLEADO(
     IN nomempleado VARCHAR(25),
     IN direcempleado VARCHAR(30),
     IN fenaciempleado DATE,
+    IN usuario_empleado VARCHAR(40),
+    IN password_empleado VARCHAR(10),
+    IN email_empleado VARCHAR(40),
+    IN tel_empleado VARCHAR(10),
     IN rhempleado VARCHAR(5)
 )
 BEGIN
@@ -18,34 +22,17 @@ BEGIN
         nom_empleado = nomempleado,
         dire_empleado = direcempleado,
         fnaci_empleado = fenaciempleado,
+        usuario_empleado = usuarioempleado,
+        password_empleado = passwordempleado,
+        email_empleado = emailempleado,
+        tel_empleado = telempleado,
         rh_empleado = rhempleado
     WHERE id_empleado = idempleado;
 END;
 //
 
-DELIMITER //
-CREATE PROCEDURE ACTUALIZAR_TEL_EMPLEADO(
-    IN idtelempleado INT,
-    IN telempleado BIGINT
-)
-BEGIN
-    UPDATE TEL_EMPLEADO SET
-        tel_empleado = telempleado
-    WHERE id_tel_empleado = idtelempleado;
-END;
-//
 
-DELIMITER //
-CREATE PROCEDURE ACTUALIZAR_EMAIL_EMPLEADO(
-    IN idemailempleado INT,
-    IN emailempleado VARCHAR(40)
-)
-BEGIN
-    UPDATE EMAIL_EMPLEADO SET
-        email_empleado = emailempleado
-    WHERE id_email_empleado = idemailempleado;
-END;
-//
+
 
 DELIMITER //
 CREATE PROCEDURE ACTUALIZAR_USUARIO_EMPLEADO(
@@ -67,7 +54,11 @@ CREATE PROCEDURE actualizar_cliente(
     IN nomcliente VARCHAR(25),
     IN direcccliente VARCHAR(30),
     IN fenacicliente DATE,
-    IN rhcliente VARCHAR(5)
+    IN usuario_cliente VARCHAR(40),
+    IN password_cliente VARCHAR(10),
+    IN email_cliente VARCHAR(40),
+    IN rhcliente VARCHAR(5),
+    IN tel_cliente VARCHAR(10),
 )
 BEGIN
     UPDATE CLIENTE SET
@@ -76,33 +67,17 @@ BEGIN
         nom_cliente = nomcliente,
         direcc_cliente = direcccliente,
         fnaci_cliente = fenacicliente,
-        rh_cliente = rhcliente
+        usuario_cliente = usuario_cliente,
+        password_cliente = password_cliente,
+        email_cliente = email_cliente,
+        rh_cliente = rhcliente,
+        tel_cliente = tel_cliente
     WHERE id_cliente = idcliente;
 END;
 //
 
-DELIMITER //
-CREATE PROCEDURE ACTUALIZAR_TEL_CLIENTE(
-    IN idtelcliente INT,
-    IN telcliente BIGINT
-)
-BEGIN
-    UPDATE TEL_CLIENTE SET
-        tel_cliente = telcliente
-    WHERE id_tel_cliente = idtelcliente;
-END;
-//
 
-DELIMITER //
-CREATE PROCEDURE ACTUALIZAR_EMAIL_CLIENTE(
-    IN idemailcliente INT,
-    IN emailcliente VARCHAR(40)
-)
-BEGIN
-    UPDATE EMAIL_CLIENTE SET
-        email_cliente = emailcliente
-    WHERE id_email_cliente = idemailcliente;
-END;
+
 //
 
 
