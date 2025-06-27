@@ -446,6 +446,9 @@ footer {
     .section__picture{
         margin: 0 auto;
     }
+    .section__picture img{
+        width: 100%;
+    }
     .section__tarjet{
         flex-direction: column;
         width: 70%;
