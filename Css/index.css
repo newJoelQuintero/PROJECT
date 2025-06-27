@@ -21,6 +21,7 @@ header{
     background-repeat: no-repeat;
     background-size: cover;
 }
+
 /*Barra de navegacion*/
 .nav__toggle{
     width: 30px;
@@ -38,7 +39,7 @@ header{
     --prueba: translate(0);
 }
 .nav{
-    background-color: #fff;
+    background-color: #ffffff;
 }
 .nav__logo{
     font-size: 30px;
@@ -71,7 +72,7 @@ header{
 .nav__item{
     text-decoration: none;
     color: var(--color_principal);
-    font-size: 15px;
+    font-size: 18px;
     position: relative;
 }
 
@@ -114,7 +115,6 @@ header{
     margin: 2px 0;
     cursor: pointer;
 }
-/*------------------------------------*/
 
 /*Contenido del header*/
 .header__content{
