@@ -338,7 +338,7 @@ header{
 }
 
 .section__tarjet_btn:hover{
-    background-color: #e6e6e6e6;
+    background-color: hsla(0, 0%, 92%, 0.706);
     color: #000000
 }
 .b1{
