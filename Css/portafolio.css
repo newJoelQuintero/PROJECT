@@ -259,3 +259,21 @@ footer {
     padding: 0 10px;
 }
 }
+
+/*Modo oscuro*/
+.dark{
+    background-color: var(--color_modo_oscuro_p);
+    transition: 0.5s;
+}
+.dark nav{
+    background-color: var(--color_modo_oscuro_s);
+}
+.dark .nav__list{
+    background-color: var(--color_modo_oscuro_s);
+}
+.dark .main{
+    background-color: var(--color_modo_oscuro_p);
+}
+.dark .main_paragraph{
+    color: #f6f6f6;
+}
