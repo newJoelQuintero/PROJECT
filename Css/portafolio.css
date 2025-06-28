@@ -228,20 +228,20 @@ footer {
   }
 
   .main_img {
-    width: 80%; 
+    width: 90%; 
     flex: none;
   }
 
   .main_paragraph {
     margin-top: 20px;
-    width: 90%;
+    width: 100%;
     text-align: justify;
   }
 
   .main_title {
     font-size: 25px;
     text-align: center;
-    width: 90%;
+    width: 100%;
     justify-content: center;
   }
   .contenedor-footer {
