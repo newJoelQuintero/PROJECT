@@ -17,10 +17,6 @@ rh_empleado VARCHAR(5)NOT NULL,
 UNIQUE(dni_empleado),
 CHECK(password_empleado >= 8));
 
-CREATE TABLE USUARIO(
-nom_usuario VARCHAR(40) PRIMARY KEY NOT NULL,
-password_usuario VARCHAR(25) NOT NULL);
-
 CREATE TABLE CLIENTE(
 id_cliente INT PRIMARY KEY AUTO_INCREMENT,
 tipo_documento ENUM('CC', 'TI', 'PET', 'PPT','Pasaporte') NOT NULL,
