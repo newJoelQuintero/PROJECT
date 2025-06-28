@@ -416,8 +416,6 @@ footer {
 
 /*-------------------------*/
 
-
-
 @media(width > 900px){
     .nav__container{
         --prueba: translate(0)

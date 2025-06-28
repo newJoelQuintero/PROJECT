@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../Css/citas.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citas--NeuroEsencia</title>
+</head>
+<body>
+    <header>
+        <nav class="nav">
+            <div class="nav__container">
+                <a href="#" class="nav__logo">NeuroEsencia</a>
+            <label for="menu" class="nav__toggle">
+                <input type="checkbox" id="menu" class="menu">
+            </label>
+                <ul class="nav__list">
+                    <li>
+                        <a href="../index.html" class="nav__item">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Inicio</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../PORTAFOLIO/portafolio.html" class="nav__item">
+                        <i class="fa-solid fa-user"></i>
+                        <span>Portafolio</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav__item">
+                        <i class="fa-solid fa-business-time"></i>
+                        <span>Servicios</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../CITAS/citas.html" class="nav__item">
+                        <i class="fa-solid fa-calendar"></i>
+                        <span>Citas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../FORMULARIO/inicio_sesion.html" class="nav__item nav__item--active">
+                        <span>Cuenta</span>
+                        </a>
+                    </li>
+                    <li>
+                        <button class="nav__btn_mode" id="bdark">
+                            <i class="fa-solid fa-moon icon_mode"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        </header>
+
+     <div class="container">
+    <h1>Reservar una cita</h1>
+    <form>
+      <h2>Selecciona un plan</h2>
+      <div class="plan_selector">
+        <label class="plan_option">
+          <input type="radio" name="plan" value="Basico"  />
+          <div class="plan_box">
+            <strong>Basico</strong>
+            <span>$000</span>
+          </div>
+        </label>
+
+        <label class="plan_option">
+          <input type="radio" name="plan" value="Estandar" />
+          <div class="plan_box">
+            <strong>Estandar</strong>
+            <span>$000</span>
+          </div>
+        </label>
+
+        <label class="plan_option">
+          <input type="radio" name="plan" value="Premium" />
+          <div class="plan_box">
+            <strong>Premium</strong>
+            <span>$000</span>
+          </div>
+        </label>
+      </div>
+
+      <h2>Datos personales</h2>
+      <div class="form_group">
+        <label for="nombre">Nombre completo</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Nombre completo" required>
+      </div>
+
+      <div class="form_group">
+        <label for="email">Correo Electronico</label>
+        <input type="email" id="email" name="email" placeholder="Correo electronico" required>
+      </div>
+
+      <div class="form_group">
+        <label for="telefono">Telefono</label>
+        <input type="tel" id="telefono" name="telefono" placeholder="Telefono" required>
+      </div>
+
+      <h2>Agenda tu cita</h2>
+      <div class="form_group">
+        <label for="fecha">Fecha</label>
+        <input type="date" id="fecha" name="fecha" required>
+      </div>
+
+      <div class="form_group">
+        <label for="hora">Hora</label>
+        <input type="time" id="hora" name="hora" required>
+      </div>
+
+      <div class="form_group">
+        <label for="medio">Medio</label>
+        <select id="medio" name="medio" required>
+          <option value="">Selecciona una opción</option>
+          <option value="Teams">Teams</option>
+          <option value="Google Meet">Google Meet</option>
+          <option value="Teléfono">Teléfono</option>
+          <option value="WhatsApp">WhatsApp</option>
+        </select>
+      </div>
+
+      <div class="form_group">
+        <label for="motivo">Motivo (opcional)</label>
+        <textarea id="motivo" name="motivo" rows="3"></textarea>
+      </div>
+
+      <button type="submit" class="btn">Reservar cita</button>
+    </form>
+  </div>   
+
+  <footer>
+            <div class="contenedor-footer">
+                <div class="content-foo">
+                    <h4>Numero</h4>
+                    <p>33123239944</p>
+                </div>
+                <div class="content-foo">
+                    <h4>Email</h4>
+                    <p> NeuroEsencia@gmail.com</p>
+                </div>
+                <div class="content-foo">
+                    <h4>Location</h4>
+                    <p>NeuroEsencia</p>
+                </div>
+            </div>
+            <h2 class="titulo-final">&copy; NeuroEsencia</h2>
+         </footer>
+         
+    <script src="../SCRIPT/mode.js"></script>
