@@ -1,35 +1,29 @@
 USE db_neuroEsencia;
 
 INSERT INTO EMPLEADO (tipo_documento, dni_empleado, nom_empleado, dire_empleado, fnaci_empleado, usuario_empleado, password_empleado, email_empleado, tel_empleado, rh_empleado) VALUES
-('CC', '1234567890', 'Juan Pérez', 'Calle 123', '1985-05-10','usu1','juan3456','juanperez@email.com',3101234567,'O+'),
-('TI', '2345678901', 'Ana Gómez', 'Carrera 45', '1990-07-22', 'usu2','Goan2900', 'anagomez@email.com', 3112345678, 'A-'),
-('PET', '3456789012', 'Luis Martínez', 'Av. Siempreviva', '1982-12-01', 'usu3','Marti1092', 'luismartinez@email.com', 3123456789, 'B+'),
-('PPT', '4567890123', 'María López', 'Calle Luna', '1979-03-17', 'usu4','Goan2900', 'marialopez@email.com', 3134567890,'AB-'),
-('Pasaporte', '5678901234', 'Carlos Torres', 'Calle Sol', '1995-09-30', 'usu5','Goan2900', 'carlostorres@email.com', 3145678901,'O-');
+('CC', '1234567890', 'Juan Pérez', 'Calle 123', '1985-05-10','jperez','pass123','juanperez@email.com',3101234567,'O+'),
+('TI', '2345678901', 'Ana Gómez', 'Carrera 45', '1990-07-22', 'agomez', 'pass234'', 'anagomez@email.com', 3112345678, 'A-'),
+('PET', '3456789012', 'Luis Martínez', 'Av. Siempreviva', '1982-12-01', 'lmartinez', 'pass345', 'luismartinez@email.com', 3123456789, 'B+'),
+('PPT', '4567890123', 'María López', 'Calle Luna', '1979-03-17', 'lmartinez', 'pass345', 'marialopez@email.com', 3134567890,'AB-'),
+('Pasaporte', '5678901234', 'Carlos Torres', 'Calle Sol', '1995-09-30','ctorres', 'pass567', 'carlostorres@email.com', 3145678901,'O-');
 
 
 
-INSERT INTO USUARIO (nom_usuario, password_usuario) VALUES
-('jperez', 'pass123'),
-('agomez', 'pass234'),
-('lmartinez', 'pass345'),
-('mlopez', 'pass456'),
-('ctorres', 'pass567');
 
 INSERT INTO CLIENTE (tipo_documento, dni_cliente, nom_cliente, direcc_cliente, fnaci_cliente, usuario_cliente, password_cliente, email_cliente, rh_cliente, tel_cliente, id_empleado) VALUES
 ('CC', '7890123456', 'Laura Ríos', 'Calle 10', '1992-02-14', 'laurios55','rios7860', 'laura.rios@email.com', 'A+', 3201234567, 1),
-('TI', '8901234567', 'Pedro Ramírez', 'Carrera 7', '1998-06-21',, 'laurios55','rios7860', 'laura.rios@email.com', 'B-', 3212345678, 2),
-('PET', '9012345678', 'Elena Castro', 'Av. 68', '1987-11-05', 'laurios55','rios7860', 'laura.rios@email.com', 'O+', 3223456789, 3),
-('PPT', '0123456789', 'Daniela Méndez', 'Calle 80', '1993-04-30', 'laurios55','rios7860', 'laura.rios@email.com', 'AB+', 3234567890, 4),
-('Pasaporte', '1098765432', 'Andrés Herrera', 'Carrera 100', '1989-01-19', 'laurios55','rios7860', 'laura.rios@email.com', 'O-', 3245678901, 5);
+('TI', '8901234567', 'Pedro Ramírez', 'Carrera 7', '1998-06-21',, 'pedro98','rami7658', 'pedro.ramirez@email.com', 'B-', 3212345678, 2),
+('PET', '9012345678', 'Elena Castro', 'Av. 68', '1987-11-05', 'elena5602','castro1456', 'elena.castro@email.com', 'O+', 3223456789, 3),
+('PPT', '0123456789', 'Daniela Méndez', 'Calle 80', '1993-04-30', 'dani9003','mendez0060', 'daniela.mendez@email.com', 'AB+', 3234567890, 4),
+('Pasaporte', '1098765432', 'Andrés Herrera', 'Carrera 100', '1989-01-19', 'andres7640','herrera8880', 'andres.herrera@email.com', 'O-', 3245678901, 5);
 
 
-INSERT INTO CITA (id_cita, fecha_cita, hora_cita, valor_cita, id_empleado) VALUES
-(101, '2025-06-01', '09:00:00', 150000, 1),
-(102, '2025-06-02', '10:00:00', 150000, 2),
-(103, '2025-06-03', '11:00:00', 150000, 3),
-(104, '2025-06-04', '14:00:00', 150000, 4),
-(105, '2025-06-05', '15:00:00', 150000, 5);
+INSERT INTO CITA (id_cita, hora_cita, valor_cita, id_empleado) VALUES
+(101, '2025-06-01 09:00:00', 150000, 1),
+(102, '2025-06-02 10:00:00', 150000, 2),
+(103, '2025-06-03 11:00:00', 150000, 3),
+(104, '2025-06-04 14:00:00', 150000, 4),
+(105, '2025-06-05 15:00:00', 150000, 5);
 
 INSERT INTO DIAGNOSTICO (id_diagnostico, nom_diagnostico, resumen_diagnostico, id_empleado) VALUES
 (201, 'Ansiedad', 'Síntomas de ansiedad generalizada.', 1),
