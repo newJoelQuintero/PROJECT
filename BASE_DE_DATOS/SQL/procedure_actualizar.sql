@@ -35,18 +35,6 @@ END;
 
 
 DELIMITER //
-CREATE PROCEDURE ACTUALIZAR_USUARIO_EMPLEADO(
-    IN usuarioempleado VARCHAR(40),
-    IN passwordusuario VARCHAR(25)
-)
-BEGIN
-    UPDATE USUARIO_EMPLEADO SET
-        password_usuario = passwordusuario
-    WHERE nom_usuario = usuarioempleado;
-END;
-//
-
-DELIMITER //
 CREATE PROCEDURE actualizar_cliente(
     IN idcliente INT,
     IN tipodocumento ENUM('CC','TI','PET','PPT','Pasaporte'),
@@ -84,13 +72,11 @@ END;
 DELIMITER //
 CREATE PROCEDURE ACTUALIZAR_CITA(
     IN idcita BIGINT,
-    IN fechacita DATE,
-    IN horacita TIME,
+    IN horacita DATETIME,
     IN valorcita FLOAT
 )
 BEGIN
     UPDATE CITA SET
-        fecha_cita = fechacita,
         hora_cita = horacita,
         valor_cita = valorcita
     WHERE id_cita = idcita;
