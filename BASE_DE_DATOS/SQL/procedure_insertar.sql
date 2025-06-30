@@ -22,16 +22,6 @@ END //
 
 
 DELIMITER //
-CREATE PROCEDURE INSERTAR_USUARIO_EMPLEADO(
-IN nomusuario VARCHAR(40),
-IN passwordusuario VARCHAR(25),
-)
-BEGIN
-	INSERT INTO USUARIO_EMPLEADO(nom_usuario,password_usuario)
-    VALUES(nomusuario, passwordusuario);
-END //
-
-DELIMITER //
 CREATE PROCEDURE INSERTAR_CLIENTE(
 IN tipodocumento ENUM('CC', 'TI', 'PET', 'PPT','Pasaporte'),
 IN dnicliente VARCHAR(10),
@@ -54,14 +44,13 @@ END //
 
 DELIMITER //
 CREATE PROCEDURE INSERTAR_CITA(
-IN fechacita DATE,
-IN horacita TIME,
+IN horacita DATETIME,
 IN valorcita FLOAT,
 IN idempleado INT
 )
 BEGIN
-	INSERT INTO CITA(fecha_cita, hora_cita, valor_cita, id_empleado)
-    VALUES(fechacita, horacita, valorcita, idempleado);
+	INSERT INTO CITA(hora_cita, valor_cita, id_empleado)
+    VALUES(horacita, valorcita, idempleado);
 END //
 
 DELIMITER //
