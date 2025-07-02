@@ -1,54 +1,44 @@
 USE db_neuroEsencia;
 
-INSERT INTO EMPLEADO (tipo_documento, dni_empleado, nom_empleado, dire_empleado, fnaci_empleado, usuario_empleado, password_empleado, email_empleado, tel_empleado, rh_empleado) VALUES
-('CC', '1234567890', 'Juan Pérez', 'Calle 123', '1985-05-10','jperez','pass123','juanperez@email.com',3101234567,'O+'),
-('TI', '2345678901', 'Ana Gómez', 'Carrera 45', '1990-07-22', 'agomez', 'pass234'', 'anagomez@email.com', 3112345678, 'A-'),
-('PET', '3456789012', 'Luis Martínez', 'Av. Siempreviva', '1982-12-01', 'lmartinez', 'pass345', 'luismartinez@email.com', 3123456789, 'B+'),
-('PPT', '4567890123', 'María López', 'Calle Luna', '1979-03-17', 'lmartinez', 'pass345', 'marialopez@email.com', 3134567890,'AB-'),
-('Pasaporte', '5678901234', 'Carlos Torres', 'Calle Sol', '1995-09-30','ctorres', 'pass567', 'carlostorres@email.com', 3145678901,'O-');
 
+INSERT INTO EMPLEADO (tipo_documento, dni_empleado, nombre, direccion, telefono, usuario, contraseña) VALUES 
+('CC', '1234567890', 'Laura Martínez', 'Calle 10', 3104567890, 'laura.m', 'clave1234'),
+('TI', '2345678901', 'Juan Pérez', 'Carrera 15', 3115678901, 'juan.p', 'pass4567'),
+('PPT', '3456789012', 'Sofía Ramírez', 'Av. 68', 3126789012, 'sofia.r', 'micontra1'),
+('PET', '4567890123', 'Carlos Herrera', 'Calle 100', 3137890123, 'carlos.h', 'clave8765'),
+('Pasaporte', '5678901234', 'Daniela Torres', 'Diagonal 45', 3148901234, 'daniela.t', 'pass3210');
 
-
-
-INSERT INTO CLIENTE (tipo_documento, dni_cliente, nom_cliente, direcc_cliente, fnaci_cliente, usuario_cliente, password_cliente, email_cliente, rh_cliente, tel_cliente, id_empleado) VALUES
-('CC', '7890123456', 'Laura Ríos', 'Calle 10', '1992-02-14', 'laurios55','rios7860', 'laura.rios@email.com', 'A+', 3201234567, 1),
-('TI', '8901234567', 'Pedro Ramírez', 'Carrera 7', '1998-06-21',, 'pedro98','rami7658', 'pedro.ramirez@email.com', 'B-', 3212345678, 2),
-('PET', '9012345678', 'Elena Castro', 'Av. 68', '1987-11-05', 'elena5602','castro1456', 'elena.castro@email.com', 'O+', 3223456789, 3),
-('PPT', '0123456789', 'Daniela Méndez', 'Calle 80', '1993-04-30', 'dani9003','mendez0060', 'daniela.mendez@email.com', 'AB+', 3234567890, 4),
-('Pasaporte', '1098765432', 'Andrés Herrera', 'Carrera 100', '1989-01-19', 'andres7640','herrera8880', 'andres.herrera@email.com', 'O-', 3245678901, 5);
-
-
-INSERT INTO CITA (id_cita, hora_cita, valor_cita, id_empleado) VALUES
-(101, '2025-06-01 09:00:00', 150000, 1),
-(102, '2025-06-02 10:00:00', 150000, 2),
-(103, '2025-06-03 11:00:00', 150000, 3),
-(104, '2025-06-04 14:00:00', 150000, 4),
-(105, '2025-06-05 15:00:00', 150000, 5);
-
-INSERT INTO DIAGNOSTICO (id_diagnostico, nom_diagnostico, resumen_diagnostico, id_empleado) VALUES
-(201, 'Ansiedad', 'Síntomas de ansiedad generalizada.', 1),
-(202, 'Depresión', 'Síntomas depresivos moderados.', 2),
-(203, 'TDAH', 'Déficit de atención con hiperactividad.', 3),
-(204, 'Estrés laboral', 'Estrés relacionado con el entorno laboral.', 4),
-(205, 'Fobia social', 'Miedo intenso a situaciones sociales.', 5);
-
-INSERT INTO METODO_PAGO (tipo_metodo) VALUES
+INSERT INTO METODO_PAGO (tipo_metodo) VALUES 
 ('Efectivo'),
-('Tarjeta de crédito'),
 ('Transferencia'),
+('Tarjeta de crédito'),
 ('Tarjeta débito'),
-('Nequi');
+('Pago móvil');
 
-INSERT INTO FACTURA (id_factura, fecha_emision, subtotal_factura, total_factura, id_empleado, id_metodo_pago) VALUES
-(301, '2025-06-01', 150000, 150000, 1, 1),
-(302, '2025-06-02', 150000, 150000, 2, 2),
-(303, '2025-06-03', 150000, 150000, 3, 3),
-(304, '2025-06-04', 150000, 150000, 4, 4),
-(305, '2025-06-05', 150000, 150000, 5, 5);
+INSERT INTO CLIENTE (tipo_documento, dni_cliente, nombre, direccion, telefono, usuario, contraseña, id_empleado) VALUES 
+('CC', '7890123456', 'Camila Gómez', 'Calle 50', 3123456789, 'camila.g', 'segura123', 1),
+('PPT', '8901234567', 'David López', 'Av. 68', 3134567890, 'david.l', 'clave2024', 2),
+('TI', '9012345678', 'Esteban Ruiz', 'Transv. 23', 3145678901, 'esteban.r', 'claveruiz', 3),
+('PET', '0123456789', 'Isabela Méndez', 'Calle 60', 3156789012, 'isabela.m', 'contraisa', 4),
+('CC', '1098765432', 'Tomás Silva', 'Av. 30', 3167890123, 'tomas.s', 'tomclave1', 5);
 
-INSERT INTO TRATAMIENTO (id_tratamiento, nom_tratamiento, tipo_tratamiento, resumen_tratamiento, id_diagnostico) VALUES
-(401, 'Terapia cognitivo-conductual', 'Psicoterapia individual', 'Enfocada en modificar pensamientos negativos.', 201),
-(402, 'Terapia familiar sistémica', 'Psicoterapia familiar', 'Aborda conflictos dentro de la familia.', 202),
-(403, 'Terapia de pareja centrada en emociones', 'Psicoterapia de pareja', 'Mejora la comunicación afectiva.', 203),
-(404, 'Intervención conductual infantil', 'Psicología infantil', 'Dirigida a modificar conductas problemáticas.', 204),
-(405, 'Terapia de exposición', 'Psicoterapia individual', 'Enfrentar gradualmente situaciones temidas.', 205);
+INSERT INTO DIAGNOSTICO (id_diagnostico, nom_diagnostico, resumen_diagnostico, id_empleado) VALUES 
+(201, 'Ansiedad generalizada', 'Paciente con ansiedad persistente y nerviosismo', 1),
+(202, 'Depresión leve', 'Estado anímico bajo, sin ideación suicida', 2),
+(203, 'Trastorno de pánico', 'Episodios de miedo intenso y repentino', 3),
+(204, 'Estrés laboral', 'Síntomas de agotamiento por trabajo excesivo', 4),
+(205, 'Dificultades del sueño', 'Problemas de insomnio recurrente', 5);
+
+INSERT INTO TRATAMIENTO (id_tratamiento, nom_tratamiento, tipo_tratamiento, resumen_tratamiento, id_diagnostico) VALUES 
+(301, 'Terapia cognitiva', 'Psicoterapia individual', 'Enfocada en identificar pensamientos negativos', 201),
+(302, 'Terapia de activación', 'Psicoterapia individual', 'Incrementar actividades gratificantes', 202),
+(303, 'Terapia de exposición', 'Psicoterapia individual', 'Exposición controlada a estímulos de pánico', 203),
+(304, 'Apoyo familiar', 'Psicoterapia familiar', 'Trabajo con familia para mejorar dinámicas', 204),
+(305, 'Higiene del sueño', 'Psicología infantil', 'Rutinas y hábitos para mejorar el sueño', 205);
+
+INSERT INTO CITA (id_cita, hora_cita, valor_cita, id_empleado, id_metodo_pago) VALUES 
+(401, '2025-07-02 10:00:00', 100000, 1, 1),
+(402, '2025-07-03 15:30:00', 120000, 2, 2),
+(403, '2025-07-04 09:00:00', 95000, 3, 3),
+(404, '2025-07-05 13:45:00', 110000, 4, 4),
+(405, '2025-07-06 08:30:00', 130000, 5,5);
