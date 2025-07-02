@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard NeuroEsencia</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../Css/dashboard.css">
+</head>
+<body>
+
+  <aside class="sidebar" id="sidebar">
+  <button id="toggleMenu" class="hamburger">
+    <i class='bx bx-menu'></i>
+  </button>
+
+  <ul>
+    <li><a href="#"><i class='bx bx-calendar'></i><span>Citas</span></a></li>
+    <li><a href="#"><i class='bx bx-pencil'></i><span>Historial Clínico</span></a></li>
+    <li><a href="#"><i class='bx bx-heart'></i><span>Servicios</span></a></li>
+    <li><a href="#"><i class='bx bx-package'></i><span>Planes</span></a></li>
+    <li><a href="#"><i class='bx bx-calendar-event'></i><span>Calendario</span></a></li>
+    <li><a href="#"><i class='bx bx-credit-card'></i><span>Pagos</span></a></li>
+    <li><a href="#"><i class='bx bx-user'></i><span>Perfil</span></a></li>
+  </ul>
+</aside>
+
+
+  <main>
+    <h1>Bienvenida, Dra.</h1>
+    <p>Selecciona una opción para comenzar tu día productivo.</p>
+  </main>
+
+ <script>
+  const toggleMenu = document.getElementById("toggleMenu");
+  const sidebar = document.querySelector(".sidebar");
+
+  toggleMenu.addEventListener("click", () => {
+    sidebar.classList.toggle("active");
+    toggleMenu.classList.toggle("move"); 
+  });
+</script>
+
+
+</body>
+</html>
