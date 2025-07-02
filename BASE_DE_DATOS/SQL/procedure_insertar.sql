@@ -4,20 +4,17 @@ DELIMITER //
 CREATE PROCEDURE INSERTAR_EMPLEADO(
 IN tipodocumento ENUM('CC', 'TI', 'PET', 'PPT','Pasaporte'),
 IN dniempleado VARCHAR(10),
-IN nomempleado VARCHAR(25),
-IN direempleado VARCHAR(30),
-IN fnaciempleado DATE,
-IN usuario_empleado VARCHAR(40),
-IN password_empleado VARCHAR(10),
-IN email_empleado VARCHAR(40),
-IN tel_empleado VARCHAR(10),
-IN rhempleado VARCHAR(5)
+IN nombre VARCHAR(30),
+IN direccion VARCHAR(50),
+IN telefono BIGINT,
+IN usuario VARCHAR(40),
+IN contraseña VARCHAR(10)
 )
 BEGIN
-	INSERT INTO EMPLEADO(tipo_documento, dni_empleado, nom_empleado, direc_empleado, fnaci_empleado, usuario_empleado, password_empleado, email_empleado, tel_empleado, rh_empleado)
-    VALUES(tipodocumento, dniempleado, nomempleado, direempleado, fnaciempleado, usuarioempleado, passwordempleado, emailempleado, telempleado, rhempleado);
+	INSERT INTO EMPLEADO(tipo_documento, dni_empleado, nombre, direccion, telefono, usuario, contraseña)
+    VALUES(id_empleado, tipodocumento, dniempleado, nom, dir, tel, usu, contra);
 END //
-
+SELECT * FROM CLIENTE
 
 
 
@@ -25,19 +22,16 @@ DELIMITER //
 CREATE PROCEDURE INSERTAR_CLIENTE(
 IN tipodocumento ENUM('CC', 'TI', 'PET', 'PPT','Pasaporte'),
 IN dnicliente VARCHAR(10),
-IN nomcliente VARCHAR(25),
-IN direcccliente VARCHAR(30),
-IN fnacicliente DATE,
-IN usuario_cliente VARCHAR(40),
-IN password_cliente VARCHAR(10),
-IN email_cliente VARCHAR(40),
-IN rhcliente VARCHAR(5),
-IN tel_cliente VARCHAR(10)
+IN nombre VARCHAR(25),
+IN direccion VARCHAR(30),
+IN telefono BIGINT,
+IN usuario VARCHAR(40),
+IN contraseña VARCHAR(10),
 IN idempleado INT
 )
 BEGIN
-	INSERT INTO CLIENTE(tipo_documento, dni_cliente, nom_cliente, direcc_cliente, fnaci_cliente, usuario_cliente, password_cliente, email_cliente, rh_cliente, tel_cliente, id_empleado)
-    VALUES(tipodocumento, dnicliente, nomcliente, direcccliente, fnacicliente, usuariocliente, passwordcliente, emailcliente, rhcliente, tel_cliente, idempleado);
+	INSERT INTO CLIENTE(tipo_documento, dni_cliente, nombre, direccion, telefono, usuario, contraseña, id_empleado)
+    VALUES(tipodocumento, dnicliente, nomb, direc, tele, usua, contra,  idempleado);
 END //
 
 
@@ -46,11 +40,13 @@ DELIMITER //
 CREATE PROCEDURE INSERTAR_CITA(
 IN horacita DATETIME,
 IN valorcita FLOAT,
-IN idempleado INT
+IN idempleado INT,
+IN idmetodopago INT
+
 )
 BEGIN
-	INSERT INTO CITA(hora_cita, valor_cita, id_empleado)
-    VALUES(horacita, valorcita, idempleado);
+	INSERT INTO CITA(hora_cita, valor_cita, id_empleado, id_metodo_pago)
+    VALUES(horacita, valorcita, idempleado, idmetodopago);
 END //
 
 DELIMITER //
