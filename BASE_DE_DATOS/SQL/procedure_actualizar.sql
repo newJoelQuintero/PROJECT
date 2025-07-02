@@ -4,29 +4,23 @@ DELIMITER //
 
 CREATE PROCEDURE ACTUALIZAR_EMPLEADO(
     IN idempleado INT,
-    IN tipodocumento ENUM('CC','TI','PET','PPT','Pasaporte'),
+    IN tipodocumento ENUM('CC', 'TI', 'PET', 'PPT','Pasaporte'),
     IN dniempleado VARCHAR(10),
-    IN nomempleado VARCHAR(25),
-    IN direcempleado VARCHAR(30),
-    IN fenaciempleado DATE,
-    IN usuario_empleado VARCHAR(40),
-    IN password_empleado VARCHAR(10),
-    IN email_empleado VARCHAR(40),
-    IN tel_empleado VARCHAR(10),
-    IN rhempleado VARCHAR(5)
+    IN nombre VARCHAR(30),
+    IN direccion VARCHAR(50),
+    IN telefono BIGINT,
+    IN usuario VARCHAR(40),
+    IN contraseña VARCHAR(10)
 )
 BEGIN
     UPDATE EMPLEADO SET
         tipo_documento = tipodocumento,
         dni_empleado = dniempleado,
-        nom_empleado = nomempleado,
-        dire_empleado = direcempleado,
-        fnaci_empleado = fenaciempleado,
-        usuario_empleado = usuarioempleado,
-        password_empleado = passwordempleado,
-        email_empleado = emailempleado,
-        tel_empleado = telempleado,
-        rh_empleado = rhempleado
+        nombre = nomempleado,
+        direccion = direcempleado,
+	    telefono = telempleado,
+        usuario = usuarioempleado,
+        contraseña = contraempleado
     WHERE id_empleado = idempleado;
 END;
 //
@@ -37,29 +31,25 @@ END;
 DELIMITER //
 CREATE PROCEDURE actualizar_cliente(
     IN idcliente INT,
-    IN tipodocumento ENUM('CC','TI','PET','PPT','Pasaporte'),
-    IN dnicliente VARCHAR(10),
-    IN nomcliente VARCHAR(25),
-    IN direcccliente VARCHAR(30),
-    IN fenacicliente DATE,
-    IN usuario_cliente VARCHAR(40),
-    IN password_cliente VARCHAR(10),
-    IN email_cliente VARCHAR(40),
-    IN rhcliente VARCHAR(5),
-    IN tel_cliente VARCHAR(10)
+   IN tipodocumento ENUM('CC', 'TI', 'PET', 'PPT','Pasaporte'),
+   IN dnicliente VARCHAR(10),
+   IN nombre VARCHAR(25),
+   IN direccion VARCHAR(30),
+   IN telefono BIGINT,
+   IN usuario VARCHAR(40),
+   IN contraseña VARCHAR(10),
+   IN idempleado INT
 )
 BEGIN
     UPDATE CLIENTE SET
         tipo_documento = tipodocumento,
         dni_cliente = dnicliente,
-        nom_cliente = nomcliente,
-        direcc_cliente = direcccliente,
-        fnaci_cliente = fenacicliente,
-        usuario_cliente = usuario_cliente,
-        password_cliente = password_cliente,
-        email_cliente = email_cliente,
-        rh_cliente = rhcliente,
-        tel_cliente = tel_cliente
+        nombre = nomcliente,
+        direccion = direcccliente,
+	    telefono = tel_cliente,
+        usuario = usuario_cliente,
+        contraseña = contra_cliente
+        
     WHERE id_cliente = idcliente;
 END;
 //
@@ -73,12 +63,15 @@ DELIMITER //
 CREATE PROCEDURE ACTUALIZAR_CITA(
     IN idcita BIGINT,
     IN horacita DATETIME,
-    IN valorcita FLOAT
+    IN valorcita FLOAT,
+    IN idmetodopago INT
+
 )
 BEGIN
     UPDATE CITA SET
         hora_cita = horacita,
-        valor_cita = valorcita
+        valor_cita = valorcita,
+        id_metodo_pago = idmetodopago
     WHERE id_cita = idcita;
 END;
 //
