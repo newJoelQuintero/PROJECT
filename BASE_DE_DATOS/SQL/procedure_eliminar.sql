@@ -8,35 +8,8 @@ delete from EMPLEADO
 where id_empleado = idempleado;
 end; //
 delimiter 
+ 
 
-delimiter //
-create procedure ELIMINAR_TEL_EMPLEADO
-(in idtelempleado int)
-begin 
-delete from TEL_EMPLEADO
-where id_tel_empleado = idtelempleado;
-end; //
-delimiter 
-
-
-delimiter //
-create procedure ELIMINAR_EMAIL_EMPLEADO
-(in idemailempleado int)
-begin 
-delete from EMAIL_EMPLEADO
-where id_email_empleado = idemailempleado;
-end; //
-delimiter 
-
-
-delimiter //
-create procedure ELIMINAR_USUARIO_EMPLEADO
-(in usuarioempleado VARCHAR(40))
-begin 
-delete from USUARIO_EMPLEADO
-where usuario_empleado = usuarioempleado;
-end; //
-delimiter 
 
 
 delimiter //
@@ -45,26 +18,6 @@ create procedure ELIMINAR_CLIENTE
 begin 
 delete from CLIENTE
 where id_cliente = idcliente;
-end; //
-delimiter 
-
-
-delimiter //
-create procedure ELIMINAR_TEL_CLIENTE
-(in idtelcliente INT)
-begin 
-delete from TEL_CLIENTE
-where id_tel_cliente = idtelcliente;
-end; //
-delimiter 
-
-
-delimiter //
-create procedure ELIMINAR_EMAIL_CLIENTE
-(in idemailcliente INT)
-begin 
-delete from EMAIL_CLIENTE
-where id_email_cliente = idemailcliente;
 end; //
 delimiter 
 
