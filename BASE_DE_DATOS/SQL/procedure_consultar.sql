@@ -10,36 +10,7 @@ end //
 
 CALL CONSULTAR_EMPLEADO()
 
-DELIMITER //
-create procedure CONSULTAR_TEL_EMPLEADO()
-begin
 
-select* from TEL_EMPLEADO ;
-
-end //
-
-CALL CONSULTAR_TEL_EMPLEADO()
-
-DELIMITER //
-create procedure CONSULTAR_EMAIL_EMPLEADO()
-begin
-
-select* from EMAIL_EMPLEADO ;
-
-end //
-
-CALL CONSULTAR_EMAIL_EMPLEADO()
-
-
-DELIMITER //
-create procedure CONSULTAR_USUARIO_EMPLEADO()
-begin
-
-select* from USUARIO_EMPLEADO ;
-
-end //
-
-CALL CONSULTAR_USUARIO_EMPLEADO()
 
 
 DELIMITER //
@@ -54,26 +25,6 @@ CALL CONSULTAR_CLIENTE()
 
 
 DELIMITER //
-create procedure CONSULTAR_TEL_CLIENTE()
-begin
-
-select* from TEL_CLIENTE ;
-
-end //
-
-CALL CONSULTAR_TEL_CLIENTE()
-
-DELIMITER //
-create procedure CONSULTAR_EMAIL_CLIENTE()
-begin
-
-select* from EMAIL_CLIENTE ;
-
-end //
-
-CALL CONSULTAR_EMAIL_CLIENTE()
-
-DELIMITER //
 create procedure CONSULTAR_CITA()
 begin
 
@@ -82,6 +33,7 @@ select* from CITA ;
 end //
 
 CALL CONSULTAR_CITA()
+
 
 DELIMITER //
 create procedure CONSULTAR_DIAGNOSTICO()
@@ -92,6 +44,7 @@ select* from DIAGNOSTICO ;
 end //
 
 CALL CONSULTAR_DIAGNOSTICO()
+
 
 DELIMITER //
 create procedure CONSULTAR_METODO_PAGO()
