@@ -1,46 +1,67 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard NeuroEsencia</title>
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="../Css/dashboard.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../IMG/logo.png" type="image/x-icon">
+    <title>Centro de control--¡Bienvenido!</title>
+    <link rel="stylesheet" href="../CSS/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="container">
+        <aside class="sidebar">
+            <ul class="sidebar__list">
+                <li class="sidebar__element">
+                    <i class="fa-solid fa-house sidebar__icon"></i>
+                    <div class="sidebar__hide">
+                        <a href="../Controller/controller.html" class="sidebar__text">Inicio</a>
+                    </div>
+                </li>
+                <li class="list__item list__item--click sidebar__element">
+                    <i class="fa-solid fa-cube sidebar__icon"></i>
+                    <div class="list__bottom list__bottom--click sidebar__hide">
+                        <a href="#" class="nav__link">Modulos</a>
+                        <i class="fa-solid fa-chevron-down list__arrow"></i>
+                    </div>
+                    <ul class="list__show">
+                        <li class="list__inside">
+                            <a href="../CLASE_EMPLEADO/CONSULTA_EMPLEADO.php" class="nav__link nav__link--inside">Empleado</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list__item list__item--click sidebar__element">
+                    <i class="fa-solid fa-file sidebar__icon"></i>
+                    <div class="list__bottom list__bottom--click sidebar__hide">
+                        <a href="#" class="nav__link">Reportes</a>
+                        <i class="fa-solid fa-chevron-down list__arrow"></i>
+                    </div>
+                    <ul class="list__show">
+                        <li class="list__inside">
+                            <a href="../Vistas/CITA_EMPLEADO/CITA_EMPLEADO.php" class="nav__link nav__link--inside">C.E</a>
+                            <a href="../Vistas/CITAS_HOY/CITA_H.php" class="nav__link nav__link--inside">C.Hoy</a>
+                            <a href="../Vistas/EMPLEADO_CARGO/EMPLEADO_CARGO.php" class="nav__link nav__link--inside">E.Cargo</a>
+                            <a href="../Vistas/FACTURA_METODO_P/FACTURA_M.php" class="nav__link nav__link--inside">Pagos</a>
+                            <a href="../Vistas/PRODUCTO_ALMACENAMIENTO/PRODUCTO_A.php" class="nav__link nav__link--inside">Inventario</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar__element">
+                    <i class="fa-solid fa-moon sidebar__icon"></i>
+                    <div class="sidebar__hide">
+                        <button class="btn-dark" id="bdark">Modo Oscuro</button>
+                    </div>
+                </li>
+            </ul>
+        </aside>
+    </div>
+    <main class="main">
 
-  <aside class="sidebar" id="sidebar">
-  <button id="toggleMenu" class="hamburger">
-    <i class='bx bx-menu'></i>
-  </button>
-
-  <ul>
-    <li><a href="#"><i class='bx bx-calendar'></i><span>Citas</span></a></li>
-    <li><a href="#"><i class='bx bx-pencil'></i><span>Historial Clínico</span></a></li>
-    <li><a href="#"><i class='bx bx-heart'></i><span>Servicios</span></a></li>
-    <li><a href="#"><i class='bx bx-package'></i><span>Planes</span></a></li>
-    <li><a href="#"><i class='bx bx-calendar-event'></i><span>Calendario</span></a></li>
-    <li><a href="#"><i class='bx bx-credit-card'></i><span>Pagos</span></a></li>
-    <li><a href="#"><i class='bx bx-user'></i><span>Perfil</span></a></li>
-  </ul>
-</aside>
-
-
-  <main>
-    <h1>Bienvenida, Dra.</h1>
-    <p>Selecciona una opción para comenzar tu día productivo.</p>
-  </main>
-
- <script>
-  const toggleMenu = document.getElementById("toggleMenu");
-  const sidebar = document.querySelector(".sidebar");
-
-  toggleMenu.addEventListener("click", () => {
-    sidebar.classList.toggle("active");
-    toggleMenu.classList.toggle("move"); 
-  });
-</script>
-
-
+    </main>
+    <script src="../JS/script_mode.js"></script>
+    <script src="../JS/index.js"></script>
 </body>
 </html>

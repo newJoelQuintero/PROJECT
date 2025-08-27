@@ -1,72 +1,74 @@
-USE db_neuroEsencia
+USE db_neuroEsencia;
 
-delimiter //
-create procedure ELIMINAR_EMPLEADO
-(in idempleado int)
-begin 
-delete from EMPLEADO
-where id_empleado = idempleado;
-end; //
-delimiter 
- 
+DELIMITER //
+CREATE PROCEDURE ELIMINAR_EMPLEADO(IN p_idempleado INT)
+BEGIN 
+    DELETE FROM EMPLEADO
+    WHERE id_empleado = p_idempleado;
+END;
+//
+DELIMITER ;
 
+DELIMITER //
+CREATE PROCEDURE ELIMINAR_CLIENTE(IN p_idcliente INT)
+BEGIN 
+    DELETE FROM CLIENTE
+    WHERE id_cliente = p_idcliente;
+END;
+//
+DELIMITER ;
 
+DELIMITER //
+CREATE PROCEDURE ELIMINAR_CITA(IN p_idcita BIGINT)
+BEGIN 
+    DELETE FROM CITA
+    WHERE id_cita = p_idcita;
+END;
+//
+DELIMITER ;
 
-delimiter //
-create procedure ELIMINAR_CLIENTE
-(in idcliente INT)
-begin 
-delete from CLIENTE
-where id_cliente = idcliente;
-end; //
-delimiter 
+DELIMITER //
+CREATE PROCEDURE ELIMINAR_DIAGNOSTICO(IN p_iddiagnostico BIGINT)
+BEGIN 
+    DELETE FROM DIAGNOSTICO
+    WHERE id_diagnostico = p_iddiagnostico;
+END;
+//
+DELIMITER ;
 
+DELIMITER //
+CREATE PROCEDURE ELIMINAR_METODO_PAGO(IN p_idmetodo INT)
+BEGIN 
+    DELETE FROM METODO_PAGO
+    WHERE id_metodo_pago = p_idmetodo;
+END;
+//
+DELIMITER ;
 
-delimiter //
-create procedure ELIMINAR_CITA
-(in idcita INT)
-begin 
-delete from CITA
-where id_cita = idcita;
-end; //
-delimiter 
+DELIMITER //
+CREATE PROCEDURE ELIMINAR_FACTURA(IN p_idfactura BIGINT)
+BEGIN 
+    DELETE FROM FACTURA
+    WHERE id_factura = p_idfactura;
+END;
+//
+DELIMITER ;
 
+DELIMITER //
+CREATE PROCEDURE ELIMINAR_TRATAMIENTO(IN p_idtratamiento BIGINT)
+BEGIN 
+    DELETE FROM TRATAMIENTO
+    WHERE id_tratamiento = p_idtratamiento;
+END;
+//
+DELIMITER ;
 
-delimiter //
-create procedure ELIMINAR_DIAGNOSTICO
-(in iddiagnostico INT)
-begin 
-delete from DIAGNOSTICO
-where id_diagnostico = iddiagnostico;
-end; //
-delimiter
-
-
-delimiter //
-create procedure ELIMINAR_METODO_PAGO
-(in idmetodo INT)
-begin 
-delete from METODO_PAGO
-where idmetodo = idmetodo;
-end; //
-delimiter
-
-
-delimiter //
-create procedure ELIMINAR_FACTURA
-(in idfactura INT)
-begin 
-delete from FACTURA
-where id_factura = idfactura;
-end; //
-delimiter
-
-
-delimiter //
-create procedure ELIMINAR_TRATAMIENTO
-(in idtratamiento INT)
-begin 
-delete from TRATAMIENTO
-where id_tratamiento = idtratamiento;
-end; //
-delimiter
+DELIMITER //
+CREATE PROCEDURE ELIMINAR_HISTORIAL_CLINICO(
+    IN p_idhistorial BIGINT
+)
+BEGIN
+    DELETE FROM HISTORIAL_CLINICO
+    WHERE id_historial = p_idhistorial;
+END;
+//

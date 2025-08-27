@@ -53,6 +53,8 @@ body{
     background-color: #fff;
     padding: 40px 30px;
     border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+    border-bottom: 5px solid var(--color_principal);
 }
 .form__container{
     display: flex;
@@ -66,41 +68,35 @@ body{
 .form__container input{
     width: 28em;
     height: 40px;
-    border-radius: 10px;
-    background-color: #e6e6e6e6;
     border: none;
-    padding: 0 10px;
+    border-bottom: 2px solid var(--color_principal);
+    padding-bottom: 5px;
+    outline: none;
+    font-size: 16px;
+
 }
-.btn__submit{
-    padding: 10px 15px;
+button{
+    border: none;
+    font-size: 16px;
+    padding: 20px 170px;
     background-color: var(--color_principal);
     display: grid;
     place-content: center;
     text-decoration: none;
     margin: 20px auto;
     color: #fff;
-    border-radius: 10px;
+    border-radius: 10px; 
+    cursor: pointer;
+    margin-left: 10px;
 }
 .form__option{
-    font-size: 15px;
-    display: grid;
-    place-content: center;
-    margin: 30px 0;
+    display: flex;
+    justify-content: space-between;
 }
-/* .body__btn--color{
-    background-color: #1d5786;
-} */
- .btn__register{
-    display: grid;
-    place-content: center;
+.form__option a{
     text-decoration: none;
-    background-color: #19507c;
-    color: #fff;
-    width: 10em;
-    padding: 8px 0;
-    border-radius: 10px;
-    margin: 0 auto;
- }
+    color: var(--color_modo_oscuro_t);
+}
 footer {
     background: hsla(0, 0%, 0%, 0.775);
     padding: 60px 0 30px 0;

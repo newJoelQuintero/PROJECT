@@ -1,139 +1,151 @@
-USE db_neuroEsencia
-
+USE db_neuroEsencia;
 DELIMITER //
 
 CREATE PROCEDURE ACTUALIZAR_EMPLEADO(
-    IN idempleado INT,
-    IN tipodocumento ENUM('CC', 'TI', 'PET', 'PPT','Pasaporte'),
-    IN dniempleado VARCHAR(10),
-    IN nombre VARCHAR(30),
-    IN direccion VARCHAR(50),
-    IN telefono BIGINT,
-    IN usuario VARCHAR(40),
-    IN contraseña VARCHAR(10)
+    IN p_idempleado INT,
+    IN p_tipodocumento VARCHAR(20),
+    IN p_dniempleado VARCHAR(10),
+    IN p_nombre VARCHAR(30),
+    IN p_direccion VARCHAR(50),
+    IN p_telefono VARCHAR(15),
+    IN p_usuario VARCHAR(40),
+    IN p_contrasena VARCHAR(255)
 )
 BEGIN
     UPDATE EMPLEADO SET
-        tipo_documento = tipodocumento,
-        dni_empleado = dniempleado,
-        nombre = nomempleado,
-        direccion = direcempleado,
-	    telefono = telempleado,
-        usuario = usuarioempleado,
-        contraseña = contraempleado
-    WHERE id_empleado = idempleado;
+        tipo_documento = p_tipodocumento,
+        dni_empleado = p_dniempleado,
+        nombre = p_nombre,
+        direccion = p_direccion,
+        telefono = p_telefono,
+        usuario = p_usuario,
+        contrasena = p_contrasena
+    WHERE id_empleado = p_idempleado;
 END;
 //
 
-
-
-
-DELIMITER //
-CREATE PROCEDURE actualizar_cliente(
-    IN idcliente INT,
-   IN tipodocumento ENUM('CC', 'TI', 'PET', 'PPT','Pasaporte'),
-   IN dnicliente VARCHAR(10),
-   IN nombre VARCHAR(25),
-   IN direccion VARCHAR(30),
-   IN telefono BIGINT,
-   IN usuario VARCHAR(40),
-   IN contraseña VARCHAR(10),
-   IN idempleado INT
+CREATE PROCEDURE ACTUALIZAR_CLIENTE(
+    IN p_idcliente INT,
+    IN p_tipodocumento VARCHAR(20),
+    IN p_dnicliente VARCHAR(10),
+    IN p_nombre VARCHAR(25),
+    IN p_direccion VARCHAR(30),
+    IN p_telefono VARCHAR(15),
+    IN p_usuario VARCHAR(40),
+    IN p_contrasena VARCHAR(255),
+    IN p_idempleado INT
 )
 BEGIN
     UPDATE CLIENTE SET
-        tipo_documento = tipodocumento,
-        dni_cliente = dnicliente,
-        nombre = nomcliente,
-        direccion = direcccliente,
-	    telefono = tel_cliente,
-        usuario = usuario_cliente,
-        contraseña = contra_cliente
-        
-    WHERE id_cliente = idcliente;
+        tipo_documento = p_tipodocumento,
+        dni_cliente = p_dnicliente,
+        nombre = p_nombre,
+        direccion = p_direccion,
+        telefono = p_telefono,
+        usuario = p_usuario,
+        contrasena = p_contrasena,
+        id_empleado = p_idempleado
+    WHERE id_cliente = p_idcliente;
 END;
 //
 
-
-
-//
-
-
-DELIMITER //
 CREATE PROCEDURE ACTUALIZAR_CITA(
-    IN idcita BIGINT,
-    IN horacita DATETIME,
-    IN valorcita FLOAT,
-    IN idmetodopago INT
-
+    IN p_idcita BIGINT,
+    IN p_horacita DATETIME,
+    IN p_valorcita FLOAT,
+    IN p_idempleado INT,
+    IN p_idmetodopago INT
 )
 BEGIN
     UPDATE CITA SET
-        hora_cita = horacita,
-        valor_cita = valorcita,
-        id_metodo_pago = idmetodopago
-    WHERE id_cita = idcita;
+        hora_cita = p_horacita,
+        valor_cita = p_valorcita,
+        id_empleado = p_idempleado,
+        id_metodo_pago = p_idmetodopago
+    WHERE id_cita = p_idcita;
 END;
 //
 
-
-DELIMITER //
 CREATE PROCEDURE ACTUALIZAR_DIAGNOSTICO(
-    IN iddiagnostico BIGINT,
-    IN nomdiagnostico VARCHAR(30),
-    IN resumendiagnostico VARCHAR(100)
+    IN p_iddiagnostico BIGINT,
+    IN p_nomdiagnostico VARCHAR(30),
+    IN p_resumendiagnostico VARCHAR(100),
+    IN p_idempleado INT
 )
 BEGIN
     UPDATE DIAGNOSTICO SET
-        nom_diagnostico = nombrediagnostico,
-        resumen_diagnostico = resumendiagnostico
-    WHERE id_diagnostico = iddiagnostico;
+        nom_diagnostico = p_nomdiagnostico,
+        resumen_diagnostico = p_resumendiagnostico,
+        id_empleado = p_idempleado
+    WHERE id_diagnostico = p_iddiagnostico;
 END;
 //
 
-
-DELIMITER //
 CREATE PROCEDURE ACTUALIZAR_METODO_PAGO(
-    IN idmetodo INT,
-    IN tipometodopago VARCHAR(30)
+    IN p_idmetodo INT,
+    IN p_tipometodopago VARCHAR(30)
 )
 BEGIN
     UPDATE METODO_PAGO SET
-        tipo_metodo = tipometodopago
-    WHERE id_metodo_pago = idmetodo;
+        tipo_metodo = p_tipometodopago
+    WHERE id_metodo_pago = p_idmetodo;
 END;
 //
 
-
-DELIMITER //
 CREATE PROCEDURE ACTUALIZAR_FACTURA(
-    IN idfactura BIGINT,
-    IN fechafactura DATE,
-    IN subtotalfactura FLOAT,
-    IN totalfactura FLOAT
+    IN p_idfactura BIGINT,
+    IN p_fechafactura DATE,
+    IN p_subtotalfactura FLOAT,
+    IN p_totalfactura FLOAT,
+    IN p_idempleado INT,
+    IN p_idmetodopago INT
 )
 BEGIN
     UPDATE FACTURA SET
-        fecha_emision = fechafactura,
-        subtotal_factura = subtotalfactura,
-        total_factura = totalfactura
-    WHERE id_factura = idfactura;
+        fecha_emision = p_fechafactura,
+        subtotal_factura = p_subtotalfactura,
+        total_factura = p_totalfactura,
+        id_empleado = p_idempleado,
+        id_metodo_pago = p_idmetodopago
+    WHERE id_factura = p_idfactura;
 END;
 //
 
-
-DELIMITER //
 CREATE PROCEDURE ACTUALIZAR_TRATAMIENTO(
-    IN idtratamiento BIGINT,
-    IN nomtratamiento VARCHAR(30),
-    IN tipotratamiento ENUM('Psicoterapia individual','Psicoterapia familiar','Psicoterapia de pareja','Psicología infantil'),
-    IN resumentratamiento VARCHAR(100)
+    IN p_idtratamiento BIGINT,
+    IN p_nomtratamiento VARCHAR(30),
+    IN p_tipotratamiento VARCHAR(30),
+    IN p_resumentratamiento VARCHAR(100),
+    IN p_iddiagnostico BIGINT
 )
 BEGIN
     UPDATE TRATAMIENTO SET
-        nom_tratamiento = nomtratamiento,
-        tipo_tratamiento = tipotratamiento,
-        resumen_tratamiento = resumentratamiento
-    WHERE id_tratamiento = idtratamiento;
+        nom_tratamiento = p_nomtratamiento,
+        tipo_tratamiento = p_tipotratamiento,
+        resumen_tratamiento = p_resumentratamiento,
+        id_diagnostico = p_iddiagnostico
+    WHERE id_tratamiento = p_idtratamiento;
+END;
+//
+
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE ACTUALIZAR_HISTORIAL_CLINICO(
+    IN p_idhistorial BIGINT,
+    IN p_idcliente INT,
+    IN p_idcita BIGINT,
+    IN p_iddiagnostico BIGINT,
+    IN p_idtratamiento BIGINT,
+    IN p_observaciones VARCHAR(255)
+)
+BEGIN
+    UPDATE HISTORIAL_CLINICO SET
+        id_cliente = p_idcliente,
+        id_cita = p_idcita,
+        id_diagnostico = p_iddiagnostico,
+        id_tratamiento = p_idtratamiento,
+        observaciones = p_observaciones
+    WHERE id_historial = p_idhistorial;
 END;
 //

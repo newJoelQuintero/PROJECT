@@ -1,115 +1,126 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+*,::after,::before{
+    margin: 0;
+    box-sizing: border-box;
 }
-
-body {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #e6e6e6e6, #7d5e9e);
-  display: flex;
-  font-family: "Poppins", sans-serif;
+body{
+    font-family: "Poppins", sans-serif;
+    transition: all .5s;
+    display: flex;
 }
-.sidebar {
-  position: fixed;
-  top: 80px;
-  left: 20px;
-  background-color: #7d5e9e;
-  border-radius: 20px;
-  width: 60px;
-  height: calc(100vh - 100px);
-  padding: 20px 0;
-  transition: width 0.3s ease;
-  overflow: hidden;
-  z-index: 99;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.container{
+    position: absolute;
+    display: flex;
+    height: 100vh;
+    align-items: center;
 }
-
-.sidebar.active {
-  width: 220px;
+.sidebar{
+    background-color: #fff;
+    width: max-content;
+    border-radius: 15px;
+    padding: 2rem 1rem;
 }
-
-.hamburger {
-  background: none;
-  color: white;
-  border: none;
-  font-size: 26px;
-  margin-bottom: 20px;
-  cursor: pointer;
-  transition: color 0.3s;
+.sidebar:hover .sidebar__element {
+    grid-template-columns: 40px 1fr;
 }
+.sidebar__list{
+    list-style: none;
+    padding: 0;
 
-.hamburger:hover {
-  color: #000000;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
 }
-
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: flex-start;
+.sidebar__element{
+    padding: .8rem 1.3rem;
+    border-radius: 3px;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 40px 0fr;
+    color: #000;
+    font-weight: 500;
+    transition: all .5s;
 }
-
-.sidebar ul li {
-  width: 100%;
-  text-align: left;
+.sidebar__element p{
+    padding-left: 20px;
 }
-
-.sidebar ul li a {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  color: white;
-  padding: 10px 20px;
-  gap: 10px;
-  text-decoration: none;
-  transition: background 0.3s;
-  border-radius: 10px;
-  white-space: nowrap;
+.sidebar__element a{
+    text-decoration: none;
+    color: #333;
 }
-
-.sidebar ul li a:hover {
-  background: rgba(255, 255, 255, 0.1);
+.sidebar__element:has(.sidebar__icon--logo){
+    margin-bottom: 1rem;
 }
-
-.sidebar ul li a span {
-  opacity: 0;
-  transform: translateX(-10px);
-  transition: 0.3s;
+.sidebar__icon{
+    overflow: hidden;
+    justify-self: center;
+    font-size: 20px;
 }
-
-.sidebar.active ul li a span {
-  opacity: 1;
-  transform: translateX(0);
+.sidebar__hide{
+    overflow: hidden;
 }
-
-
-main {
-  margin-left: 100px;
-  padding: 80px 40px;
-  flex: 1;
-  transition: margin-left 0.3s;
+.sidebar__logo,.sidebar__text{
+    padding-left: 1.3rem;
 }
-
-.sidebar.active ~ main {
-  margin-left: 240px;
+.sidebar__icon--logo{
+    max-width: 60px;
 }
-
-
-@media (max-width: 768px) {
-  .sidebar {
-    top: 70px;
-    height: calc(100vh - 90px);
-  }
-
-  main {
-    padding: 80px 20px;
-  }
+.sidebar__icon--avatar{
+    width: 40px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 50%;
+}
+.sidebar__title, .sidebar__info, .sidebar__hide{
+    text-wrap: nowrap;
+    text-align: left;
+}
+.sidebar__element--avatar{
+    margin-top: auto;
+}
+.sidebar__element .btn-dark{
+    border: none;
+    background-color: transparent;
+    font-size: inherit;
+    color: #333;
+    font-weight: 500;
+    font-family: inherit;
+    margin-left: 15px;
+    cursor: pointer;
+}
+img{
+    border-radius: 50%;
+}
+/*--------------------------------------*/
+.list__item{
+    overflow: hidden;
+} 
+.list__item--click{
+    cursor: pointer;
+}
+.list__bottom{
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    width: 70%;
+    margin: 0 auto;
+}
+.arrow .list__arrow{
+    transform: rotate(90deg);
+}
+.list__arrow{
+    margin-left: auto;
+    transition: transform .3s;
+}
+.list__inside{
+    margin: 10px;
+}
+.list__show{
+    width: 80%;
+    margin-left: 50px;
+    border-left: 2px solid #303440;
+    list-style: none;
+    transition: height .4s;
+    height: 0;
 }
