@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Cita - NeuroEsencia</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fdfbfd 0%, #e8daef 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .form-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(142, 68, 173, 0.1);
+            width: 100%;
+            max-width: 600px;
+            overflow: hidden;
+            border: none;
+        }
+
+        .card-header-custom {
+            background-color: #8e44ad;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .card-body-custom {
+            padding: 40px;
+        }
+
+        .form-label { font-weight: 500; color: #555; margin-bottom: 8px; font-size: 0.9rem; }
+        .form-control, .form-select { border-radius: 10px; border: 1px solid #e0e0e0; padding: 12px 15px; font-size: 0.95rem; transition: all 0.3s; }
+        .form-control:focus, .form-select:focus { border-color: #8e44ad; box-shadow: 0 0 0 0.25rem rgba(142, 68, 173, 0.15); }
+
+        .btn-save { background-color: #8e44ad; border: none; border-radius: 10px; padding: 12px; font-weight: 600; width: 100%; transition: all 0.3s; }
+        .btn-save:hover { background-color: #76378f; transform: translateY(-2px); }
+
+        .btn-back { color: #999; text-decoration: none; display: inline-block; margin-top: 20px; font-size: 0.9rem; transition: color 0.3s; }
+        .btn-back:hover { color: #555; }
+        
+        .input-icon { position: absolute; right: 15px; top: 42px; color: #aaa; }
+        .position-relative { position: relative; }
+        
+        #horaSeleccionada { text-align: center; }
+
+    </style>
+</head>
+<body>
+
+    <div class="form-card">
+        
+        <div th:if="${error}" class="alert alert-danger text-center mx-4 mt-3" role="alert">
+            <span th:text="${error}">Mensaje de Error de Validación</span>
+        </div>
+        <div th:if="${success}" class="alert alert-success text-center mx-4 mt-3" role="alert">
+            <span th:text="${success}">Mensaje de Éxito de Validación</span>
+        </div>
+
+        <div class="card-header-custom">
+            <h3 class="m-0 fw-bold"><i class="bi bi-calendar-plus me-2"></i> Agendar Cita</h3>
+            <p class="m-0 small text-white-50">Complete los datos para reservar el espacio</p>
+        </div>
+
+        <div class="card-body-custom">
+            <form th:action="@{/citas/guardar}" th:object="${cita}" method="post" id="citaForm">
+                <input type="hidden" th:field="*{idCita}" />
+
+                <input type="hidden" th:field="*{horaCita}" id="horaCitaCompleta" /> 
+
+                <div class="mb-4">
+                    <label for="paciente" class="form-label">Paciente</label>
+                    <select id="paciente" th:field="*{paciente}" class="form-select" required>
+                        <option value="">-- Seleccione un Paciente --</option>
+                        <option th:each="p : ${listaPacientes}" 
+                                th:value="${p.idPaciente}" 
+                                th:text="${p.nombre + ' (' + p.dniCliente + ')'}"></option>
+                    </select>
+                    <div class="form-text text-muted small">¿No aparece? Registre al paciente primero.</div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="servicio" class="form-label">Servicio o Terapia</label>
+                    <div class="position-relative">
+                        <select id="servicio" th:field="*{servicio}" class="form-select" required>
+                            <option value="">-- Seleccione el Servicio --</option>
+                            <option th:each="s : ${listaServicios}" 
+                                    th:value="${s.idServicio}" 
+                                    th:text="${s.nomServicio}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <label for="fechaSeleccionada" class="form-label">Fecha</label>
+                        <input type="date" id="fechaSeleccionada" class="form-control" required>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label for="horaSeleccionada" class="form-label">Hora (7:00 AM - 6:30 PM)</label>
+                        <select id="horaSeleccionada" class="form-select" required>
+                            <option value="">-- Seleccione la Hora --</option>
+                            </select>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="lugarCita" class="form-label">Lugar / Consultorio</label>
+                    <input type="text" id="lugarCita" th:field="*{lugarCita}" class="form-control" placeholder="Ej: Consultorio 101" required>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary btn-save">
+                        <i class="bi bi-check-circle-fill me-2"></i> Confirmar Cita
+                    </button>
+                </div>
+
+                <div class="text-center">
+                    <a th:href="@{/citas}" class="btn-back">
+                        <i class="bi bi-arrow-left"></i> Cancelar y volver a la agenda
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const horaSelect = document.getElementById('horaSeleccionada');
+            const fechaInput = document.getElementById('fechaSeleccionada');
+            const form = document.getElementById('citaForm');
+            const horaCitaCompleta = document.getElementById('horaCitaCompleta');
+
+            function getTodayDateString() {
+                const today = new Date();
+                const year = today.getFullYear();
+                const month = String(today.getMonth() + 1).padStart(2, '0');
+                const day = String(today.getDate()).padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            }
+
+            const todayString = getTodayDateString();
+            fechaInput.setAttribute('min', todayString);
+
+            function generarOpcionesHora() {
+                let inicio = 7 * 60;
+                let fin = (18 * 60) + 30;
+                let intervalo = 30;
+
+                let html = '<option value="">-- Seleccione la Hora --</option>';
+
+                for (let minutos = inicio; minutos <= fin; minutos += intervalo) {
+                    const h = Math.floor(minutos / 60);
+                    const m = minutos % 60;
+                    
+                    const horaValue = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:00`; 
+                    
+                    const displayTime = new Date(2000, 0, 1, h, m).toLocaleTimeString('es-ES', { 
+                        hour: '2-digit', 
+                        minute: '2-digit', 
+                        hour12: true 
+                    });
+
+                    html += `<option value="${horaValue}">${displayTime}</option>`;
+                }
+                horaSelect.innerHTML = html;
+            }
+
+            function validarDia() {
+                const fecha = fechaInput.value;
+                if (!fecha) return;
+
+                const fechaObj = new Date(fecha + 'T00:00:00'); 
+                
+                if (fechaObj.getDay() === 0) {
+                    alert("Atención: No se permite agendar citas los Domingos.");
+                    fechaInput.value = '';
+                    return;
+                }
+                
+                if (fecha < todayString) {
+                    alert("Error: No se puede agendar citas en el pasado.");
+                    fechaInput.value = todayString;
+                }
+            }
+            
+            form.addEventListener('submit', function(e) {
+                const fecha = fechaInput.value;
+                const hora = horaSelect.value;
+                
+                if (fecha && hora) {
+                    const dateTimeLocal = `${fecha}T${hora}`;
+                    horaCitaCompleta.value = dateTimeLocal;
+                } else {
+                    e.preventDefault();
+                    alert("Por favor, seleccione la fecha y la hora.");
+                }
+            });
+
+            fechaInput.addEventListener('change', validarDia);
+
+            generarOpcionesHora();
+        });
+    </script>
+</body>
+</html>

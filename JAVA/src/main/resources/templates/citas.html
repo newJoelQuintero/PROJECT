@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda de Citas - NeuroEsencia</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #8e44ad;
+            --sidebar-width: 280px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f2f5;
+            overflow-x: hidden;
+        }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: linear-gradient(135deg, #8e44ad 0%, #6c3483 100%);
+            position: fixed;
+            top: 0; left: 0; z-index: 1000;
+            display: flex; flex-direction: column;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.05);
+        }
+
+        .sidebar-header {
+            padding: 30px 25px; color: white;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar-menu { padding: 20px 15px; flex-grow: 1; }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85);
+            padding: 12px 20px; margin-bottom: 8px; border-radius: 12px;
+            display: flex; align-items: center; font-weight: 500;
+            text-decoration: none; transition: all 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: white; transform: translateX(5px);
+        }
+
+        .nav-link i { margin-right: 15px; font-size: 1.25rem; }
+
+        /* --- CONTENIDO --- */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 30px;
+        }
+
+        /* --- TABLA --- */
+        .table-card {
+            background: white;
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            overflow: hidden;
+        }
+
+        .card-header-actions {
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .custom-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .custom-table thead th {
+            background-color: #f8f9fa;
+            color: #7f8c8d;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            padding: 15px 25px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .custom-table tbody td {
+            padding: 20px 25px;
+            vertical-align: middle;
+            border-bottom: 1px solid #f8f9fa;
+            color: #555;
+        }
+
+        .custom-table tbody tr:hover { background-color: #fcf9ff; }
+
+        /* Badge de Servicio */
+        .service-badge {
+            background-color: #e8daef;
+            color: #8e44ad;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        /* Fecha y Hora */
+        .date-container { display: flex; align-items: center; gap: 10px; }
+        .date-icon {
+            width: 40px; height: 40px;
+            background-color: #ebf5fb; color: #3498db;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem;
+        }
+        .date-text { font-weight: 600; color: #2c3e50; display: block;}
+        .time-text { font-size: 0.85rem; color: #7f8c8d; }
+
+        /* Buscador */
+        .search-box { position: relative; max-width: 300px; }
+        .search-box input {
+            padding-left: 40px;
+            border-radius: 20px;
+            border: 1px solid #e0e0e0;
+            background-color: #f8f9fa;
+        }
+        .search-box i {
+            position: absolute; left: 15px; top: 50%;
+            transform: translateY(-50%); color: #aaa;
+        }
+
+        /* Botones */
+        .btn-cancel {
+            width: 35px; height: 35px;
+            border-radius: 10px;
+            display: inline-flex; align-items: center; justify-content: center;
+            background: #fdeded; color: #e74c3c;
+            transition: all 0.2s; text-decoration: none; border: none;
+        }
+        .btn-cancel:hover { background: #e74c3c; color: white; }
+
+        .btn-new {
+            background-color: var(--primary-color);
+            color: white; border-radius: 30px;
+            padding: 10px 25px; font-weight: 500;
+            box-shadow: 0 4px 10px rgba(142, 68, 173, 0.3);
+            border: none; transition: all 0.3s; text-decoration: none;
+        }
+        .btn-new:hover { background-color: #7d3c98; transform: translateY(-2px); color: white;}
+
+    </style>
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div style="font-size: 1.5rem; font-weight: 700;">
+                <i class="bi bi-person-heart"></i> NeuroEsencia
+            </div>
+            <small class="text-white-50 ms-4">Gestión Clínica</small>
+        </div>
+
+        <div class="sidebar-menu">
+            <a href="/dashboard" class="nav-link">
+                <i class="bi bi-grid-1x2-fill"></i> Dashboard
+            </a>
+            <a href="/pacientes" class="nav-link">
+                <i class="bi bi-people"></i> Pacientes
+            </a>
+            <a href="/citas" class="nav-link active">
+                <i class="bi bi-calendar-event-fill"></i> Citas
+            </a>
+            <a href="/historiales" class="nav-link">
+                <i class="bi bi-clipboard2-pulse"></i> Historiales
+            </a>
+            <a href="/empleados" class="nav-link">
+                <i class="bi bi-person-badge"></i> Personal
+            </a>
+            <a href="/facturas" class="nav-link">
+                <i class="bi bi-receipt"></i> Facturación
+            </a>
+        </div>
+        
+        <div style="padding: 20px;">
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="nav-link w-100 border-0 bg-transparent text-start" style="color: #ffcccc;">
+                    <i class="bi bi-box-arrow-left"></i> Cerrar Sesión
+                </button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h4 class="fw-bold m-0" style="color: #2c3e50;">Agenda de Citas</h4>
+                <p class="text-muted small m-0">Administra las sesiones y consultas</p>
+            </div>
+            <div class="text-muted small">
+                <i class="bi bi-house"></i> / Citas / Calendario
+            </div>
+        </div>
+
+        <div th:if="${mensaje}" class="alert alert-success alert-dismissible fade show shadow-sm mb-4" role="alert" style="border-left: 5px solid #2ecc71;">
+            <div class="d-flex align-items-center">
+                <i class="bi bi-check-circle-fill fs-4 me-3 text-success"></i>
+                <div>
+                    <strong>¡Operación Exitosa!</strong>
+                    <div th:text="${mensaje}"></div>
+                </div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <div th:if="${error}" class="alert alert-danger alert-dismissible fade show shadow-sm mb-4" role="alert" style="border-left: 5px solid #e74c3c;">
+            <div class="d-flex align-items-center">
+                <i class="bi bi-exclamation-triangle-fill fs-4 me-3 text-danger"></i>
+                <div>
+                    <strong>Acción Denegada</strong>
+                    <div th:text="${error}"></div>
+                </div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div class="table-card">
+            
+            <div class="card-header-actions">
+                <div class="search-box">
+                    <i class="bi bi-search"></i>
+                    <input type="text" id="searchInput" class="form-control" placeholder="Buscar paciente, servicio...">
+                </div>
+                
+                <a th:href="@{/citas/nueva}" class="btn-new">
+                    <i class="bi bi-plus-lg me-2"></i> Agendar Cita
+                </a>
+            </div>
+
+            <div class="table-responsive">
+                <table class="custom-table" id="tablaCitas">
+                    <thead>
+                        <tr>
+                            <th>Fecha y Hora</th>
+                            <th>Paciente</th>
+                            <th>Servicio / Tratamiento</th>
+                            <th>Ubicación</th>
+                            <th class="text-end" sec:authorize="hasAnyAuthority('ADMINISTRADOR', 'SECRETARIA')">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="c : ${listaCitas}">
+                            <td>
+                                <div class="date-container">
+                                    <div class="date-icon">
+                                        <i class="bi bi-calendar3"></i>
+                                    </div>
+                                    <div>
+                                        <span class="date-text" th:text="${#temporals.format(c.horaCita, 'dd MMM yyyy')}">01 Ene 2024</span>
+                                        <span class="time-text" th:text="${#temporals.format(c.horaCita, 'hh:mm a')}">10:00 AM</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div style="font-weight: 500;" th:text="${c.paciente.nombre}">Nombre Paciente</div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="service-badge">
+                                    <i class="bi bi-activity me-1"></i>
+                                    <span th:text="${c.servicio.nomServicio}">Consulta</span>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="text-muted">
+                                    <i class="bi bi-geo-alt-fill me-1 text-danger"></i>
+                                    <span th:text="${c.lugarCita}">Consultorio 101</span>
+                                </span>
+                            </td>
+                            <td class="text-end" sec:authorize="hasAnyAuthority('ADMINISTRADOR', 'SECRETARIA')">
+                                <a th:href="@{/citas/eliminar/{id}(id=${c.idCita})}" 
+                                   onclick="return confirm('¿Está seguro de cancelar esta cita?');" 
+                                   class="btn-cancel" title="Cancelar Cita">
+                                    <i class="bi bi-x-lg"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(listaCitas)}">
+                            <td colspan="5" class="text-center py-5 text-muted">
+                                <i class="bi bi-calendar-x fs-1 d-block mb-3"></i>
+                                No hay citas programadas en la agenda.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('searchInput').addEventListener('keyup', function() {
+            var input = this.value.toLowerCase();
+            var rows = document.querySelectorAll('#tablaCitas tbody tr');
+
+            rows.forEach(function(row) {
+                var text = row.textContent.toLowerCase();
+                if(text.includes(input)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

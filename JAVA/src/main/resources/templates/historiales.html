@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historiales Clínicos - NeuroEsencia</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #8e44ad;
+            --sidebar-width: 280px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f2f5;
+            overflow-x: hidden;
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: linear-gradient(135deg, #8e44ad 0%, #6c3483 100%);
+            position: fixed;
+            top: 0; left: 0; z-index: 1000;
+            display: flex; flex-direction: column;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.05);
+        }
+
+        .sidebar-header {
+            padding: 30px 25px; color: white;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar-menu { padding: 20px 15px; flex-grow: 1; }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85);
+            padding: 12px 20px; margin-bottom: 8px; border-radius: 12px;
+            display: flex; align-items: center; font-weight: 500;
+            text-decoration: none; transition: all 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: white; transform: translateX(5px);
+        }
+
+        .nav-link i { margin-right: 15px; font-size: 1.25rem; }
+
+
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 30px;
+        }
+
+   
+        .table-card {
+            background: white;
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            overflow: hidden;
+        }
+
+        .card-header-actions {
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+      
+        .custom-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .custom-table thead th {
+            background-color: #f8f9fa;
+            color: #7f8c8d;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            padding: 15px 25px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .custom-table tbody td {
+            padding: 20px 25px;
+            vertical-align: top; 
+            border-bottom: 1px solid #f8f9fa;
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .custom-table tbody tr:hover {
+            background-color: #fcf9ff;
+        }
+
+      
+        .patient-name { font-weight: 600; color: #2c3e50; display: block; }
+        .doc-name { font-size: 0.85rem; color: #8e44ad; font-weight: 500; }
+        
+        .diagnosis-tag {
+            background-color: #fef9e7;
+            color: #d35400;
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+
+      
+        .search-box {
+            position: relative;
+            max-width: 300px;
+        }
+        .search-box input {
+            padding-left: 40px;
+            border-radius: 20px;
+            border: 1px solid #e0e0e0;
+            background-color: #f8f9fa;
+        }
+        .search-box i {
+            position: absolute;
+            left: 15px; top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+        }
+
+     
+        .btn-delete {
+            width: 35px; height: 35px;
+            border-radius: 10px;
+            display: inline-flex; align-items: center; justify-content: center;
+            background: #fdeded; color: #e74c3c;
+            transition: all 0.2s;
+            text-decoration: none;
+            border: none;
+        }
+        .btn-delete:hover { background: #e74c3c; color: white; }
+
+ 
+        .btn-new {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 30px;
+            padding: 10px 25px;
+            font-weight: 500;
+            box-shadow: 0 4px 10px rgba(142, 68, 173, 0.3);
+            border: none;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        .btn-new:hover { background-color: #7d3c98; transform: translateY(-2px); color: white;}
+
+    </style>
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div style="font-size: 1.5rem; font-weight: 700;">
+                <i class="bi bi-person-heart"></i> NeuroEsencia
+            </div>
+            <small class="text-white-50 ms-4">Gestión Clínica</small>
+        </div>
+
+        <div class="sidebar-menu">
+            <a href="/dashboard" class="nav-link">
+                <i class="bi bi-grid-1x2-fill"></i> Dashboard
+            </a>
+            <a href="/pacientes" class="nav-link">
+                <i class="bi bi-people"></i> Pacientes
+            </a>
+            <a href="/citas" class="nav-link">
+                <i class="bi bi-calendar-event"></i> Citas
+            </a>
+            <a href="/historiales" class="nav-link active">
+                <i class="bi bi-clipboard2-pulse-fill"></i> Historiales
+            </a>
+            <a href="/empleados" class="nav-link">
+                <i class="bi bi-person-badge"></i> Personal
+            </a>
+            <a href="/facturas" class="nav-link">
+                <i class="bi bi-receipt"></i> Facturación
+            </a>
+        </div>
+        
+        <div style="padding: 20px;">
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="nav-link w-100 border-0 bg-transparent text-start" style="color: #ffcccc;">
+                    <i class="bi bi-box-arrow-left"></i> Cerrar Sesión
+                </button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h4 class="fw-bold m-0" style="color: #2c3e50;">Historiales Clínicos</h4>
+                <p class="text-muted small m-0">Registro de diagnósticos y tratamientos</p>
+            </div>
+            <div class="text-muted small">
+                <i class="bi bi-house"></i> / Clínica / Historiales
+            </div>
+        </div>
+
+        <div class="table-card">
+            
+            <div class="card-header-actions">
+                <div class="search-box">
+                    <i class="bi bi-search"></i>
+                    <input type="text" id="searchInput" class="form-control" placeholder="Buscar paciente, diagnóstico...">
+                </div>
+                
+                <a th:href="@{/historiales/nuevo}" class="btn-new">
+                    <i class="bi bi-plus-lg me-2"></i> Registrar Diagnóstico
+                </a>
+            </div>
+
+            <div class="table-responsive">
+                <table class="custom-table" id="tablaHistoriales">
+                    <thead>
+                        <tr>
+                            <th style="width: 20%;">Paciente / Profesional</th>
+                            <th style="width: 25%;">Síntomas</th>
+                            <th style="width: 25%;">Diagnóstico</th>
+                            <th style="width: 20%;">Tratamiento</th>
+                            <th class="text-end" sec:authorize="hasAnyAuthority('ADMINISTRADOR', 'SECRETARIA')">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="h : ${listaHistoriales}">
+                            <td>
+                                <div class="mb-2">
+                                    <i class="bi bi-person-fill text-muted me-1"></i>
+                                    <span class="patient-name" th:text="${h.paciente.nombre}">Paciente</span>
+                                </div>
+                                <div>
+                                    <i class="bi bi-briefcase-medical-fill me-1" style="color: #8e44ad;"></i>
+                                    <span class="doc-name" th:text="${'Dr. ' + h.empleado.nombre}">Profesional</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="text-muted fst-italic">
+                                    <i class="bi bi-thermometer-half text-danger me-1"></i>
+                                    <span th:text="${h.sintomas}">Síntomas...</span>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="diagnosis-tag">
+                                    <i class="bi bi-clipboard-pulse me-1"></i>
+                                    <span th:text="${h.diagnostico}">Diagnóstico...</span>
+                                </span>
+                            </td>
+                            <td>
+                                <div style="color: #27ae60;">
+                                    <i class="bi bi-capsule me-1"></i>
+                                    <span th:text="${h.tratamiento}">Tratamiento...</span>
+                                </div>
+                            </td>
+                            <td class="text-end">
+                                <a th:href="@{/historiales/eliminar/{id}(id=${h.idHistorialClinico})}" 
+                                   onclick="return confirm('¿Está seguro de eliminar este registro clínico?');" 
+                                   class="btn-delete" title="Eliminar Registro">
+                                   <i class="bi bi-trash-fill"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(listaHistoriales)}">
+                            <td colspan="5" class="text-center py-5 text-muted">
+                                <i class="bi bi-folder2-open fs-1 d-block mb-3"></i>
+                                No hay historiales clínicos registrados.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('searchInput').addEventListener('keyup', function() {
+            var input = this.value.toLowerCase();
+            var rows = document.querySelectorAll('#tablaHistoriales tbody tr');
+
+            rows.forEach(function(row) {
+                var text = row.textContent.toLowerCase();
+                if(text.includes(input)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

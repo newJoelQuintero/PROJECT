@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroEsencia - Tu Espacio de Bienestar</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+      
+        :root {
+            --primary: #8e44ad;
+            --primary-dark: #71368a;
+            --secondary: #9b59b6;
+            --accent: #3498db;
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+            --bg-light: #f8f9fa;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            
+            
+            --dm-bg: #121212;
+            --dm-surface: #1e1e1e;
+            --dm-text: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            transition: var(--transition);
+        }
+
+        a { text-decoration: none; }
+        ul { list-style: none; }
+
+     
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        header {
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(142, 68, 173, 0.8), rgba(52, 152, 219, 0.7)), url('./IMG/header-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; 
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 15px 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px); 
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .nav.scrolled {
+            padding: 10px 0;
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .nav__container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav__logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav__logo i { font-size: 1.5rem; }
+
+        .nav__list {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav__item {
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav__item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav__item:hover::after { width: 100%; }
+        .nav__item:hover { color: var(--primary); }
+
+        .nav__item--cta {
+            background: var(--primary);
+            color: white !important;
+            padding: 10px 25px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(142, 68, 173, 0.3);
+            transition: var(--transition);
+        }
+
+        .nav__item--cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(142, 68, 173, 0.5);
+            color: white !important;
+        }
+        .nav__item--cta::after { display: none; }
+
+        .nav__toggle { display: none; font-size: 1.5rem; cursor: pointer; color: var(--text-dark); }
+        .menu-checkbox { display: none; }
+
+       
+        .header__content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 20px 50px;
+            color: white;
+        }
+
+        .header__title {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .header__paragraph {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            line-height: 1.6;
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+        }
+
+        .header__btn {
+            background: white;
+            color: var(--primary);
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            animation: fadeInUp 1s ease-out 0.6s backwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header__btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px;
+        }
+
+
+        .main { background: white; }
+        .main__content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .main__img {
+            width: 100%;
+            max-width: 450px;
+            border-radius: 30px; 
+            box-shadow: 20px 20px 0 var(--secondary), 0 20px 40px rgba(0,0,0,0.1); 
+            transform: rotate(-3deg);
+            transition: var(--transition);
+        }
+
+        .main__img:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .section-tag {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .main__title {
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            margin-bottom: 25px;
+            line-height: 1.2;
+        }
+
+        .main__paragraph {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+        }
+
+        .btn-outline {
+            padding: 12px 30px;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+       
+        .feature-section { background: var(--bg-light); }
+        .feature__content {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .feature-img-wrapper {
+            position: relative;
+        }
+        .feature-img {
+            width: 100%;
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .pricing-section { background: white; text-align: center; }
+        .pricing__title {
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            margin-bottom: 60px;
+        }
+
+        .pricing__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 50px rgba(142, 68, 173, 0.15);
+            border-color: var(--primary);
+        }
+
+        .card.featured {
+            background: linear-gradient(145deg, #8e44ad, #9b59b6);
+            color: white;
+            transform: scale(1.05);
+            z-index: 1;
+        }
+        .card.featured:hover { transform: scale(1.05) translateY(-10px); }
+
+        .card__title { font-size: 1.5rem; font-weight: 700; margin-bottom: 10px; }
+        .card__price { font-size: 2.5rem; font-weight: 800; margin: 20px 0; display: block;}
+        
+        .card__list { text-align: left; margin-bottom: 30px; flex-grow: 1; }
+        .card__list li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+        .card__list i { color: var(--accent); }
+        .card.featured .card__list i { color: #fff; }
+
+        .card__btn {
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 600;
+            background: rgba(142, 68, 173, 0.1);
+            color: var(--primary);
+            transition: var(--transition);
+        }
+        .card__btn:hover { background: var(--primary); color: white; }
+
+        .card.featured .card__btn {
+            background: white;
+            color: var(--primary);
+        }
+        .card.featured .card__btn:hover {
+            background: var(--text-dark);
+            color: white;
+        }
+
+     
+        footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 80px 0 30px;
+        }
+        .footer__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto 50px;
+            padding: 0 20px;
+            text-align: center;
+        }
+        .footer__item i {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        .footer__item h4 { font-size: 1.2rem; margin-bottom: 10px; }
+        .footer__item p { color: #aaa; }
+        
+        .copyright {
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+     
+        body.dark {
+            background-color: var(--dm-bg);
+            color: var(--dm-text);
+        }
+        body.dark .nav { background: rgba(30, 30, 30, 0.9); }
+        body.dark .nav__item { color: #ddd; }
+        body.dark .main, body.dark .pricing-section, body.dark .feature-section { background-color: var(--dm-bg); }
+        body.dark .card { background-color: var(--dm-surface); border-color: #333; }
+        body.dark .main__title, body.dark .pricing__title { color: white; }
+        body.dark .main__paragraph { color: #aaa; }
+        body.dark .card__title { color: white; }
+      
+        @media (max-width: 991px) {
+            .nav__list {
+                position: fixed;
+                top: 0; right: -100%;
+                height: 100vh;
+                width: 70%;
+                background: white;
+                flex-direction: column;
+                justify-content: center;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+                transition: 0.4s ease;
+            }
+            .nav__container:has(.menu-checkbox:checked) .nav__list { right: 0; }
+            .nav__toggle { display: block; z-index: 1001; }
+            
+            .header__title { font-size: 2.5rem; }
+            .main__content, .feature__content { grid-template-columns: 1fr; text-align: center; }
+            .main__img { transform: rotate(0); margin-bottom: 30px; }
+            .card.featured { transform: scale(1); }
+        }
+
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="nav" id="navbar">
+            <div class="nav__container">
+                <a href="#" class="nav__logo">
+                    <i class="fa-solid fa-brain"></i> NeuroEsencia
+                </a>
+                
+                <label for="menu" class="nav__toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </label>
+                <input type="checkbox" id="menu" class="menu-checkbox">
+
+                <ul class="nav__list">
+                    <li><a href="./index.html" class="nav__item">Inicio</a></li>
+                    <li><a href="/portafolio" class="nav__item">Portafolio</a></li>
+                    <li><a href="/servicios" class="nav__item">Servicios</a></li>
+                    <li><a href="/login" class="nav__item">Citas</a></li>
+                    <li>
+                        <a href="/login" class="nav__item nav__item--cta">
+                            <i class="fa-solid fa-user me-2"></i> Iniciar Sesión
+                        </a>
+                    </li>
+                    <li>
+                        <button id="bdark" style="background:none; border:none; cursor:pointer; font-size:1.2rem; color:var(--text-dark);">
+                            <i class="fa-solid fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="header__content">
+            <h1 class="header__title">Sanar es un viaje,<br>no un destino.</h1>
+            <p class="header__paragraph">
+                NeuroEsencia es tu espacio seguro de acompañamiento psicológico virtual. 
+                Profesionalismo, empatía y ciencia unidos para fortalecer tu bienestar emocional desde donde estés.
+            </p>
+            <a href="/login" class="header__btn">
+                Agenda tu Primera Sesión <i class="fa-solid fa-arrow-right" style="margin-left: 10px;"></i>
+            </a>
+        </div>
+    </header>
+
+    <section class="main section-container">
+        <div class="main__content reveal">
+            <div class="main__img-wrapper">
+                <img src="./IMG/img3.jpg" class="main__img" alt="Psicóloga Alejandra">
+            </div>
+            <div class="main__txt">
+                <span class="section-tag">Tu Especialista</span>
+                <h2 class="main__title">Hola, soy Alejandra</h2>
+                <p class="main__paragraph">
+                    Psicóloga y Magíster en Neuropsicología y Educación. Mi enfoque combina la evidencia científica con la calidez humana. 
+                    Me especializo en trastornos del neurodesarrollo y bienestar emocional, creando estrategias personalizadas para el manejo del estrés, 
+                    autoestima y desarrollo personal.
+                </p>
+                <a href="./PORTAFOLIO/portafolio.html" class="btn-outline">Ver Experiencia</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="feature-section section-container">
+        <div class="feature__content reveal">
+            <div class="section__txt">
+                <span class="section-tag">Nuestra Filosofía</span>
+                <h2 class="main__title">Más que terapia, una conexión humana</h2>
+                <p class="main__paragraph" style="font-style: italic; border-left: 4px solid var(--primary); padding-left: 20px;">
+                    "El vínculo terapéutico es la base del cambio. Mi compromiso es ofrecerte un espacio libre de juicios, 
+                    basado en la empatía profunda y el respeto absoluto. No solo buscamos aliviar síntomas, 
+                    sino reconectar con lo que le da sentido a tu vida."
+                </p>
+                <a href="/login" class="header__btn" style="background: var(--primary); color: white; margin-top: 20px;">
+                    Comenzar Ahora
+                </a>
+            </div>
+            <div class="feature-img-wrapper">
+                <img src="./IMG/img2.jpg" class="feature-img" alt="Terapia Virtual">
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing-section section-container">
+        <span class="section-tag">Inversión en ti</span>
+        <h2 class="pricing__title reveal">Elige uno de nuestros planes</h2>
+        
+        <div class="pricing__grid reveal">
+            
+            <div class="card">
+                <h3 class="card__title">Básico</h3>
+                <span class="card__price">$0.000</span>
+                <ul class="card__list">
+                    <li><i class="fa-solid fa-check"></i> 1 Sesión individual (30 min)</li>
+                    <li><i class="fa-solid fa-check"></i> Horario Lun-Vie</li>
+                    <li><i class="fa-solid fa-check"></i> Evaluación inicial simple</li>
+                    <li><i class="fa-solid fa-check"></i> Guía digital básica</li>
+                </ul>
+                <a href="/login" class="card__btn">Elegir Plan</a>
+            </div>
+
+            <div class="card featured">
+                <div style="position: absolute; top: 0; right: 0; background: #f1c40f; color: black; font-size: 0.7rem; font-weight: bold; padding: 5px 10px; border-bottom-left-radius: 10px;">POPULAR</div>
+                <h3 class="card__title">Estándar</h3>
+                <span class="card__price">$0.000</span>
+                <ul class="card__list">
+                    <li><i class="fa-solid fa-check"></i> 3 Sesiones (45 min)</li>
+                    <li><i class="fa-solid fa-check"></i> Horarios extendidos</li>
+                    <li><i class="fa-solid fa-check"></i> Soporte por correo (3 msj)</li>
+                    <li><i class="fa-solid fa-check"></i> Evaluación detallada</li>
+                    <li><i class="fa-solid fa-check"></i> Recursos PDF de apoyo</li>
+                </ul>
+                <a href="/login" class="card__btn">Elegir Plan</a>
+            </div>
+
+            <div class="card">
+                <h3 class="card__title">Premium</h3>
+                <span class="card__price">$0.000</span>
+                <ul class="card__list">
+                    <li><i class="fa-solid fa-check"></i> 5 Sesiones (60 min)</li>
+                    <li><i class="fa-solid fa-check"></i> Horarios 100% flexibles</li>
+                    <li><i class="fa-solid fa-check"></i> Soporte WhatsApp < 24h</li>
+                    <li><i class="fa-solid fa-check"></i> Plan terapéutico editable</li>
+                    <li><i class="fa-solid fa-check"></i> Talleres exclusivos</li>
+                </ul>
+                <a href="/login" class="card__btn">Elegir Plan</a>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer__grid">
+            <div class="footer__item">
+                <i class="fa-solid fa-phone"></i>
+                <h4>Contacto</h4>
+                <p>+57 312 323 9944</p>
+            </div>
+            <div class="footer__item">
+                <i class="fa-solid fa-envelope"></i>
+                <h4>Correo</h4>
+                <p>contacto@neuroesencia.com</p>
+            </div>
+            <div class="footer__item">
+                <i class="fa-solid fa-globe"></i>
+                <h4>Modalidad</h4>
+                <p>Atención 100% Online</p>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 NeuroEsencia. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <script>
+        // 1. Navbar Sticky Effect
+        window.addEventListener('scroll', function() {
+            var nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // 2. Scroll Reveal Animation (Intersección de Observador)
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting){
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // 3. Dark Mode Logic
+        const bdark = document.getElementById('bdark');
+        const body = document.querySelector('body');
+        const icon = bdark.querySelector('i');
+        
+        bdark.addEventListener('click', e => {
+            body.classList.toggle('dark');
+            if(body.classList.contains('dark')){
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+            store(body.classList.contains('dark'));
+        });
+        
+        function load(){
+            const darkmode = localStorage.getItem('darkmode');
+            if(darkmode == 'true'){
+                body.classList.add('dark');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+        }
+        
+        function store(value){
+            localStorage.setItem('darkmode', value);
+        }
+        
+        load();
+    </script>
+</body>
+</html>

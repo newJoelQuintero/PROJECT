@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facturación - NeuroEsencia</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #8e44ad;
+            --sidebar-width: 280px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f2f5;
+            overflow-x: hidden;
+        }
+
+     
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: linear-gradient(135deg, #8e44ad 0%, #6c3483 100%);
+            position: fixed;
+            top: 0; left: 0; z-index: 1000;
+            display: flex; flex-direction: column;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.05);
+        }
+
+        .sidebar-header {
+            padding: 30px 25px; color: white;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar-menu { padding: 20px 15px; flex-grow: 1; }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85);
+            padding: 12px 20px; margin-bottom: 8px; border-radius: 12px;
+            display: flex; align-items: center; font-weight: 500;
+            text-decoration: none; transition: all 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: white; transform: translateX(5px);
+        }
+
+        .nav-link i { margin-right: 15px; font-size: 1.25rem; }
+
+    
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 30px;
+        }
+
+     
+        .table-card {
+            background: white;
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            overflow: hidden;
+        }
+
+        .card-header-actions {
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .custom-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .custom-table thead th {
+            background-color: #f8f9fa;
+            color: #7f8c8d;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            padding: 15px 25px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .custom-table tbody td {
+            padding: 20px 25px;
+            vertical-align: middle;
+            border-bottom: 1px solid #f8f9fa;
+            color: #555;
+        }
+
+        .custom-table tbody tr:hover {
+            background-color: #fcf9ff;
+        }
+
+        
+        .invoice-id {
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            color: #8e44ad;
+            background: #f4ecf7;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .total-amount {
+            color: #27ae60;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .payment-method {
+            font-size: 0.9rem;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+    
+        .search-box {
+            position: relative;
+            max-width: 300px;
+        }
+        .search-box input {
+            padding-left: 40px;
+            border-radius: 20px;
+            border: 1px solid #e0e0e0;
+            background-color: #f8f9fa;
+        }
+        .search-box i {
+            position: absolute;
+            left: 15px; top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+        }
+
+     
+        .btn-view {
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            color: #555;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .btn-view:hover {
+            background-color: #8e44ad;
+            color: white;
+            border-color: #8e44ad;
+        }
+
+        
+        .btn-new {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 30px;
+            padding: 10px 25px;
+            font-weight: 500;
+            box-shadow: 0 4px 10px rgba(142, 68, 173, 0.3);
+            border: none;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        .btn-new:hover { background-color: #7d3c98; transform: translateY(-2px); color: white;}
+
+    </style>
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div style="font-size: 1.5rem; font-weight: 700;">
+                <i class="bi bi-person-heart"></i> NeuroEsencia
+            </div>
+            <small class="text-white-50 ms-4">Gestión Clínica</small>
+        </div>
+
+        <div class="sidebar-menu">
+            <a href="/dashboard" class="nav-link">
+                <i class="bi bi-grid-1x2-fill"></i> Dashboard
+            </a>
+            <a href="/pacientes" class="nav-link">
+                <i class="bi bi-people"></i> Pacientes
+            </a>
+            <a href="/citas" class="nav-link">
+                <i class="bi bi-calendar-event"></i> Citas
+            </a>
+            <a href="/historiales" class="nav-link">
+                <i class="bi bi-clipboard2-pulse"></i> Historiales
+            </a>
+            <a href="/empleados" class="nav-link">
+                <i class="bi bi-person-badge"></i> Personal
+            </a>
+            <a href="/facturas" class="nav-link active">
+                <i class="bi bi-receipt-cutoff"></i> Facturación
+            </a>
+        </div>
+        
+        <div style="padding: 20px;">
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="nav-link w-100 border-0 bg-transparent text-start" style="color: #ffcccc;">
+                    <i class="bi bi-box-arrow-left"></i> Cerrar Sesión
+                </button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h4 class="fw-bold m-0" style="color: #2c3e50;">Control Financiero</h4>
+                <p class="text-muted small m-0">Historial de facturación y ventas</p>
+            </div>
+            <div class="text-muted small">
+                <i class="bi bi-house"></i> / Finanzas / Facturas
+            </div>
+        </div>
+
+        <div class="table-card">
+            
+            <div class="card-header-actions">
+                <div class="search-box">
+                    <i class="bi bi-search"></i>
+                    <input type="text" id="searchInput" class="form-control" placeholder="Buscar folio, cliente...">
+                </div>
+                
+                <a th:href="@{/facturas/nueva}" class="btn-new">
+                    <i class="bi bi-plus-lg me-2"></i> Crear Factura
+                </a>
+            </div>
+
+            <div class="table-responsive">
+                <table class="custom-table" id="tablaFacturas">
+                    <thead>
+                        <tr>
+                            <th>Folio</th>
+                            <th>Cliente / Paciente</th>
+                            <th>Emitido Por</th>
+                            <th>Método de Pago</th>
+                            <th>Total</th>
+                            <th class="text-end" sec:authorize="hasAnyAuthority('ADMINISTRADOR', 'SECRETARIA')">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="f : ${listaFacturas}">
+                            <td>
+                                <span class="invoice-id" th:text="${'#' + f.idFactura}">#1</span>
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <i class="bi bi-person-heart text-muted"></i>
+                                    <span style="font-weight: 500;" th:text="${f.paciente.nombre}">Nombre Paciente</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center gap-2 text-muted">
+                                    <i class="bi bi-person-badge"></i>
+                                    <span th:text="${f.empleado.nombre}">Vendedor</span>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="payment-method">
+                                    <i class="bi bi-credit-card-2-front"></i> 
+                                    <span th:text="${f.tipoMetodoPago}">Efectivo</span>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="total-amount" th:text="${'$ ' + f.totalFactura}">$ 0</span>
+                            </td>
+                            <td class="text-end">
+                                <a th:href="@{/facturas/ver/{id}(id=${f.idFactura})}" class="btn-view" title="Ver Detalles y Agregar Items">
+                                    <i class="bi bi-eye-fill"></i> Detalles
+                                </a>
+                            </td>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(listaFacturas)}">
+                            <td colspan="6" class="text-center py-5 text-muted">
+                                <i class="bi bi-receipt fs-1 d-block mb-3"></i>
+                                No hay facturas registradas.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('searchInput').addEventListener('keyup', function() {
+            var input = this.value.toLowerCase();
+            var rows = document.querySelectorAll('#tablaFacturas tbody tr');
+
+            rows.forEach(function(row) {
+                var text = row.textContent.toLowerCase();
+                if(text.includes(input)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

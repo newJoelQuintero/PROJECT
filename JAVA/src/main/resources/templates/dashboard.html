@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - NeuroEsencia</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #8e44ad;
+            --secondary-color: #9b59b6;
+            --accent-color: #f4ecf7;
+            --text-dark: #2c3e50;
+            --text-muted: #7f8c8d;
+            --bg-light: #f8f9fa;
+            --sidebar-width: 280px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f2f5;
+            overflow-x: hidden;
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: linear-gradient(135deg, #8e44ad 0%, #6c3483 100%);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-header {
+            padding: 30px 25px;
+            color: white;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .brand-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sidebar-menu {
+            padding: 20px 15px;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85);
+            padding: 12px 20px;
+            margin-bottom: 8px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            transform: translateX(5px);
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-link i {
+            margin-right: 15px;
+            font-size: 1.25rem;
+        }
+
+        .logout-container {
+            padding: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .top-navbar {
+            background: white;
+            padding: 15px 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            margin-bottom: 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .welcome-text h4 {
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .date-badge {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            height: 100%;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(142, 68, 173, 0.15);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(142, 68, 173, 0.1) 0%, rgba(142, 68, 173, 0) 100%);
+            z-index: 0;
+        }
+
+        .stat-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stat-text h3 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--text-dark);
+        }
+
+        .stat-text p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+
+        .bg-purple-light { background: #f4ecf7; color: #8e44ad; }
+        .bg-green-light { background: #e8f8f5; color: #27ae60; }
+        .bg-orange-light { background: #fef5e7; color: #e67e22; }
+        .bg-blue-light { background: #ebf5fb; color: #3498db; }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .action-card {
+            background: white;
+            border: 2px solid transparent;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            display: block;
+        }
+
+        .action-card:hover {
+            border-color: var(--primary-color);
+            background: #fdfaff;
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .action-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 991px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.active { transform: translateX(0); }
+            .main-content { margin-left: 0; }
+            .toggle-btn { display: block !important; }
+        }
+
+        .toggle-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+            margin-right: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="brand-logo">
+                <i class="bi bi-person-heart"></i>
+                <span>NeuroEsencia</span>
+            </div>
+            <small class="text-white-50 ms-4 ps-2">Gestión Clínica</small>
+        </div>
+
+        <div class="sidebar-menu">
+            <a href="/dashboard" class="nav-link active">
+                <i class="bi bi-grid-1x2-fill"></i> Dashboard
+            </a>
+            <a href="/pacientes" class="nav-link">
+                <i class="bi bi-people"></i> Pacientes
+            </a>
+            <a href="/citas" class="nav-link">
+                <i class="bi bi-calendar-event"></i> Citas
+            </a>
+            <a href="/historiales" class="nav-link">
+                <i class="bi bi-clipboard2-pulse"></i> Historiales
+            </a>
+            <a href="/empleados" class="nav-link">
+                <i class="bi bi-person-badge"></i> Personal
+            </a>
+            <a href="/facturas" class="nav-link">
+                <i class="bi bi-receipt"></i> Facturación
+            </a>
+        </div>
+
+        <div class="logout-container">
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="nav-link w-100 border-0 bg-transparent text-start" style="color: #ffcccc;">
+                    <i class="bi bi-box-arrow-left"></i> Cerrar Sesión
+                </button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        
+        <div class="top-navbar">
+            <div class="d-flex align-items-center">
+                <i class="bi bi-list toggle-btn" onclick="toggleSidebar()"></i>
+                <div class="welcome-text">
+                    <h4>Bienvenido</h4>
+                    <p class="text-muted mb-0 small">Aquí está el resumen de hoy</p>
+                </div>
+            </div>
+            <div class="date-badge">
+                <i class="bi bi-calendar3 me-2"></i>
+                <span th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy')}"></span>
+            </div>
+        </div>
+
+        <div class="row g-4 mb-5">
+            <div class="col-xl-3 col-md-6">
+                <div class="stat-card">
+                    <div class="stat-content">
+                        <div class="stat-text">
+                            <h3 th:text="${totalPacientes}">0</h3>
+                            <p>Pacientes Totales</p>
+                        </div>
+                        <div class="icon-box bg-purple-light">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6">
+                <div class="stat-card">
+                    <div class="stat-content">
+                        <div class="stat-text">
+                            <h3 th:text="${totalCitas}">0</h3>
+                            <p>Citas Agendadas</p>
+                        </div>
+                        <div class="icon-box bg-green-light">
+                            <i class="bi bi-calendar-check-fill"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6">
+                <div class="stat-card">
+                    <div class="stat-content">
+                        <div class="stat-text">
+                            <h3 th:text="${totalFacturas}">0</h3>
+                            <p>Facturas Emitidas</p>
+                        </div>
+                        <div class="icon-box bg-orange-light">
+                            <i class="bi bi-cash-stack"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6">
+                <div class="stat-card">
+                    <div class="stat-content">
+                        <div class="stat-text">
+                            <h3 th:text="${totalEmpleados}">0</h3>
+                            <p>Personal Activo</p>
+                        </div>
+                        <div class="icon-box bg-blue-light">
+                            <i class="bi bi-person-badge-fill"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h5 class="section-title">Acciones Rápidas</h5>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <a href="/pacientes/nuevo" class="action-card">
+                    <div class="action-icon">
+                        <i class="bi bi-person-plus-fill"></i>
+                    </div>
+                    <h6 class="mb-0 fw-bold">Registrar Paciente</h6>
+                    <small class="text-muted">Añadir nuevo expediente</small>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="/citas/nueva" class="action-card">
+                    <div class="action-icon">
+                        <i class="bi bi-calendar-plus-fill"></i>
+                    </div>
+                    <h6 class="mb-0 fw-bold">Agendar Cita</h6>
+                    <small class="text-muted">Reservar espacio en agenda</small>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="/facturas/nueva" class="action-card">
+                    <div class="action-icon">
+                        <i class="bi bi-receipt-cutoff"></i>
+                    </div>
+                    <h6 class="mb-0 fw-bold">Nueva Factura</h6>
+                    <small class="text-muted">Generar cobro de servicio</small>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

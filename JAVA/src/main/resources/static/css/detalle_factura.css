@@ -1,0 +1,104 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #e8f8f5;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.header-factura {
+    background-color: #f2f2f2;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border-left: 5px solid #16a085;
+}
+
+.header-factura h2 {
+    margin: 0;
+    color: #16a085;
+}
+
+.header-factura h3 {
+    text-align: right;
+}
+
+.back-link {
+    text-decoration: none;
+    color: #555;
+}
+
+.form-agregar {
+    background-color: #eafaf1;
+    padding: 15px;
+    border: 1px dashed #16a085;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.add-item-form {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+}
+
+.form-group {
+    flex: 1;
+}
+
+.form-group-valor {
+    width: 150px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+select, input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.submit-button {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+th {
+    background-color: #16a085;
+    color: white;
+}
+
+.empty-row td {
+    text-align: center;
+    color: #777;
+    font-style: italic;
+}

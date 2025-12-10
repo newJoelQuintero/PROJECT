@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Paciente - NeuroEsencia</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fdfbfd 0%, #e8daef 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 15px;
+        }
+
+        .register-card {
+            background-color: white;
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(142, 68, 173, 0.15);
+            width: 100%;
+            max-width: 600px;
+            overflow: hidden;
+        }
+
+        .card-header-custom {
+            background-color: white;
+            padding: 40px 40px 20px 40px;
+            text-align: center;
+        }
+
+        .brand-title {
+            color: #8e44ad;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .card-body-custom {
+            padding: 0 40px 40px 40px;
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        .form-control, .form-select {
+            border-radius: 10px;
+            padding: 10px 15px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #8e44ad;
+            box-shadow: 0 0 0 0.25rem rgba(142, 68, 173, 0.15);
+        }
+
+        .btn-purple {
+            background-color: #8e44ad;
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 12px;
+            border-radius: 10px;
+            width: 100%;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-purple:hover {
+            background-color: #732d91;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(142, 68, 173, 0.3);
+            color: white;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+        .login-link a {
+            color: #8e44ad;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .login-link a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <div class="register-card">
+        <div class="card-header-custom">
+            <h2 class="brand-title">Crear Cuenta</h2>
+            <p class="text-muted small">Únete a NeuroEsencia y cuida tu bienestar</p>
+        </div>
+
+        <div class="card-body-custom">
+            <div th:if="${param.error}" class="alert alert-danger d-flex align-items-center" role="alert">
+    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+    <div>
+        <strong>Error:</strong> No se pudo completar el registro. <br>
+        <small>Verifica que el correo o documento no estén ya registrados.</small>
+        </div>
+        </div>
+            <form th:action="@{/registro/guardar}" method="post" th:object="${paciente}">
+                
+                <div class="mb-3">
+                    <label class="form-label">Nombre Completo</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-end-0"><i class="bi bi-person"></i></span>
+                        <input type="text" class="form-control border-start-0" th:field="*{nombre}" placeholder="Ej: Juan Pérez" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">Tipo</label>
+                        <select class="form-select" th:field="*{tipoDocumento}">
+                            <option value="CC">C.C.</option>
+                            <option value="TI">T.I.</option>
+                            <option value="CE">C.E.</option>
+                            <option value="PASAPORTE">Pasaporte</option>
+                        </select>
+                    </div>
+                    <div class="col-md-8 mb-3">
+                        <label class="form-label">Número de Documento</label>
+                        <input type="text" class="form-control" th:field="*{dniCliente}" placeholder="Ej: 1001234567" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Teléfono / Celular</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0"><i class="bi bi-phone"></i></span>
+                            <input type="text" class="form-control border-start-0" th:field="*{telefono}" placeholder="Ej: 3001234567" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Dirección</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0"><i class="bi bi-geo-alt"></i></span>
+                            <input type="text" class="form-control border-start-0" th:field="*{direccion}" placeholder="Ej: Calle 123 # 45-67" required>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-4 text-muted opacity-25">
+
+                <div class="mb-3">
+                    <label class="form-label">Correo Electrónico (Usuario)</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-end-0"><i class="bi bi-envelope"></i></span>
+                        <input type="email" class="form-control border-start-0" th:field="*{usuario}" placeholder="tu@correo.com" required>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label">Contraseña</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-end-0"><i class="bi bi-lock"></i></span>
+                        <input type="password" class="form-control border-start-0" th:field="*{contrasena}" placeholder="Crea una contraseña segura" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-purple btn-lg shadow-sm">
+                    Registrarme <i class="bi bi-arrow-right ms-2"></i>
+                </button>
+
+                <div class="login-link">
+                    ¿Ya tienes una cuenta? <a href="/login">Inicia Sesión aquí</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

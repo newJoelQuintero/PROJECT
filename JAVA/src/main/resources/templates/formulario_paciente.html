@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos del Paciente - NeuroEsencia</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fdfbfd 0%, #e8daef 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 15px;
+        }
+
+        .admission-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(142, 68, 173, 0.1);
+            width: 100%;
+            max-width: 800px;
+            overflow: hidden;
+            border: none;
+        }
+
+        .card-header-custom {
+            background-color: #8e44ad;
+            color: white;
+            padding: 30px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-body-custom {
+            padding: 40px;
+        }
+
+        .section-header {
+            color: #8e44ad;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            margin-top: 10px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #f3e5f5;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-control, .form-select {
+            border-radius: 12px;
+            border: 1px solid #e0e0e0;
+            padding: 10px 15px;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #8e44ad;
+            box-shadow: 0 0 0 0.25rem rgba(142, 68, 173, 0.15);
+        }
+
+        .btn-save {
+            background-color: #8e44ad;
+            border: none;
+            border-radius: 12px;
+            padding: 14px;
+            font-weight: 600;
+            font-size: 1rem;
+            width: 100%;
+            transition: all 0.3s;
+            margin-top: 15px;
+            box-shadow: 0 4px 15px rgba(142, 68, 173, 0.2);
+        }
+
+        .btn-save:hover {
+            background-color: #76378f;
+            transform: translateY(-2px);
+        }
+
+        .btn-back {
+            color: #7f8c8d;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 25px;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        .btn-back:hover { color: #2c3e50; }
+
+        .form-floating > label { color: #999; }
+        .form-floating > .form-control:focus ~ label { color: #8e44ad; }
+
+    </style>
+</head>
+<body>
+
+    <div class="admission-card">
+        
+        <div class="card-header-custom">
+            <div>
+                <h3 class="m-0 fw-bold" 
+                    th:text="${paciente.idPaciente == null ? 'Nuevo Ingreso de Paciente' : 'Actualizar Datos de Paciente'}">
+                    Formulario Paciente
+                </h3>
+                <p class="m-0 small text-white-50">Complete la ficha de admisión</p>
+            </div>
+            <i class="bi bi-person-heart fs-1 text-white-50"></i>
+        </div>
+
+        <div class="card-body-custom">
+            <form th:action="@{/pacientes/guardar}" th:object="${paciente}" method="post">
+                <input type="hidden" th:field="*{idPaciente}" />
+
+                <div class="section-header mt-0">
+                    <i class="bi bi-card-heading"></i> Datos de Identificación
+                </div>
+
+                <div class="row g-3 mb-3">
+                    <div class="col-md-4">
+                        <div class="form-floating">
+                            <select id="tipoDocumento" th:field="*{tipoDocumento}" class="form-select">
+                                <option value="CC">Cédula (CC)</option>
+                                <option value="TI">Tarjeta Identidad</option>
+                                <option value="PPT">PPT</option>
+                                <option value="Pasaporte">Pasaporte</option>
+                            </select>
+                            <label for="tipoDocumento">Tipo Documento</label>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-floating">
+                            <input type="text" id="dniCliente" th:field="*{dniCliente}" class="form-control" required placeholder="Nro Documento">
+                            <label for="dniCliente">Número de Documento</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-floating mb-4">
+                    <input type="text" id="nombre" th:field="*{nombre}" class="form-control" required placeholder="Nombre Completo">
+                    <label for="nombre">Nombre Completo del Paciente</label>
+                </div>
+
+                <div class="section-header">
+                    <i class="bi bi-geo-alt"></i> Contacto y Ubicación
+                </div>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0"><i class="bi bi-telephone text-muted"></i></span>
+                            <div class="form-floating flex-grow-1">
+                                <input type="text" id="telefono" th:field="*{telefono}" class="form-control border-start-0" required placeholder="Teléfono">
+                                <label for="telefono">Teléfono / Celular</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="text" id="direccion" th:field="*{direccion}" class="form-control" placeholder="Dirección">
+                            <label for="direccion">Dirección de Residencia</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-header">
+                    <i class="bi bi-laptop"></i> Acceso al Portal de Pacientes
+                </div>
+
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="text" id="usuario" th:field="*{usuario}" class="form-control" required placeholder="Usuario">
+                            <label for="usuario">Usuario (Correo)</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="password" id="contrasena" th:field="*{contrasena}" class="form-control" required placeholder="Contraseña">
+                            <label for="contrasena">Asignar Contraseña</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert alert-light border small text-muted d-flex align-items-center" role="alert">
+                    <i class="bi bi-info-circle me-2"></i>
+                    Estas credenciales permitirán al paciente consultar sus citas en línea.
+                </div>
+
+                <button type="submit" class="btn btn-save">
+                    <i class="bi bi-check-circle-fill me-2"></i> Guardar Ficha
+                </button>
+
+                <div class="text-center">
+                    <a th:href="@{/pacientes}" class="btn-back">
+                        <i class="bi bi-arrow-left"></i> Cancelar y volver
+                    </a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
